@@ -1,0 +1,66 @@
+name: fit_and_fuel
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  connectivity_plus: ^6.1.4
+  shared_preferences: ^2.5.3
+  json_annotation: ^4.9.0
+  build_runner: ^2.4.12
+  json_serializable: ^6.8.0
+  share_plus: ^11.1.0
+  dropdown_button2: ^2.3.9
+  url_launcher: ^6.2.6
+  just_audio: ^0.10.5
+  just_audio_background: ^0.0.1-beta.17
+  path_provider: ^2.1.5
+  video_thumbnail: ^0.5.6
+  video_player: ^2.9.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo1.png"
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/profiles/
+    - assets/data/exercises.json
+    - assets/data/home_exercises.json
+    - assets/data/muscle.json
+    - assets/data/playlists.json
+    - assets/data/quotes.json
+    - assets/data/recipe.json
+    - assets/data/songs.json
+    - assets/audio-opus/
+    - assets/audio-thumb/
+    - assets/playlist-thumb/
+    - assets/recipe-thumb/
+    - assets/exercise-thumb/
+    - assets/exercise/
+
+  fonts:
+    - family: Worksans
+      fonts:
+        - asset: assets/fonts/Worksans.ttf
+    - family: Salt
+      fonts:
+        - asset: assets/fonts/Salt.ttf

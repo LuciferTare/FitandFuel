@@ -1,0 +1,826 @@
+[
+  {
+    "part": "Chest",
+    "muscle": "Lower Chest",
+    "name": "Barbell Decline Bench Press",
+    "desc": "Lay on decline bench with both arms extended in front of you.\nBreak at elbows and bring your upper arms to side.\nOnce your upper arms have reached your side, press barbell back to ceiling.",
+    "equipment": "Barbell",
+    "asset": null
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Barbell Bench Press",
+    "desc": "Lay flat on the bench with your feet on the ground. With straight arms unrack the bar.\nLower the bar to your mid chest\nRaise the bar until you've locked your elbows.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Upper Chest",
+    "name": "Barbell Incline Bench Press",
+    "desc": "Position the bench between 30 and 45 degrees.\nLay flat on the bench with your feet on the ground. With straight arms unrack the bar.\nLower the bar to your mid chest\nRaise the bar (slowly and controlled) until you've locked your elbows.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_incline_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Lower Chest",
+    "name": "Dumbbell Decline Bench Press",
+    "desc": "Lay on decline bench with both arms extended in front of you.\nBreak at elbows and bring your upper arms to side.\nOnce your upper arms have reached your side, press dumbbells back to ceiling.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_decline_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Dumbbell Bench Press",
+    "desc": "Start by lying flat on bench with dumbbell in hand.\nHold dumbbells at chest level with palms facing forward.\nEngage your core and press dumbbells upward until your arms are fully extended.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Upper Chest",
+    "name": "Dumbbell Incline Bench Press",
+    "desc": "Lay flat on incline bench with your feet on ground. Raise dumbbells until you have straight arms.\nLower dumbbells to your mid chest\nRaise dumbbells until you\"ve locked your elbows.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_incline_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Dumbbell Chest Fly",
+    "desc": "Lay flat on bench and place your feet on ground.\nBegin exercise with dumbbells held together above your chest, elbows slightly bent.\nSimultaneously lower weights to either side.\nPause when weights are parallel to bench, then raise your arms to starting position.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_chest_fly.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Upper Chest",
+    "name": "Dumbbell Incline Chest Fly",
+    "desc": "Lay on incline bench with two dumbbells extended in front of you.\nYou should have slight bend in your elbows and maintain bend. Shoulder joint should do all movement.\nBring dumbbells out to your side. Stop dumbbells before going behind your body.\nBring dumbbells back together at top.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_incline_chest_fly.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Upper Chest",
+    "name": "Dumbbell Squeeze Press",
+    "desc": "Lay flat on bench with two dumbbells pressed to one another.\nBreak at elbows and keep your elbows tucked as you bring dumbbells to your chest.\nContinue to press dumbbells into one another throughout rep.\nOnce dumbbells reach chest, press back toward ceiling.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_squeeze_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Low-to-High Dumbbell Fly",
+    "desc": "Stand holding two dumbbells in each hand.\nYou should have slight bend in your elbows and maintain bend. Shoulder joint should do all movement.\nBring dumbbells out to your side. Stop dumbbells before going behind your body.\nBring dumbbells back together right in front of your chest squeezing chest intensely.",
+    "equipment": "Dumbbell",
+    "asset": null
+  },
+  {
+    "part": "Chest",
+    "muscle": "Lower Chest",
+    "name": "Dumbbell Weighted Dip",
+    "desc": "Use dip belt to attach dumbbell to yourself. Grip bars with arms straight, shoulders above hands. Keep legs straight or bent.\nLower slowly until elbows are at 90 degrees.\nPush back up to start position, extending arms fully.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_weighted_dip.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Upper Chest",
+    "name": "Machine Plate Loaded Incline Chest Press",
+    "desc": "Adjust the seat pad to match your height.\nPress the weight forward until your elbows are nearly extended. Return to the starting position with out letting the weight rest at the bottom until finishing your set.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_plate_loaded_incline_chest_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Machine Pec Fly",
+    "desc": "Adjust seat height so handles align with chest. Sit and grip handles with elbows slightly bent.\nSlowly bring handles together in front, keeping tension. Focus on squeezing chest muscles.\nReturn handles to starting position with controlled motion. Keep chest up throughout. Repeat for reps.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_pec_fly.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Lower Chest",
+    "name": "Cable Decline Bench Press",
+    "desc": "Use a handle attachment. Bring a bench over to the cables. The cables should be set above height.\nBring both of the handles to your chest and make sure you are in the center of the cable crossover.\nFrom there, you should flex and extend at both the shoulders and elbows simultaneously.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_decline_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Cable Bench Press",
+    "desc": "Use a handle attachment. Bring a bench over to the cables. The cables should be set to shoulder height.\nBring both of the handles to your chest and make sure you are in the center of the cable crossover.\nFrom there, you should flex and extend at both the shoulders and elbows simultaneously.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Upper Chest",
+    "name": "Cable Incline Bench Press",
+    "desc": "Use a handle attachment. Bring a bench over to the cables. The cables should be set fairly low.\nBring both of the handles to your chest and make sure you are in the center of the cable crossover.\nFrom there, you should flex and extend at both the shoulders and elbows simultaneously.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_incline_bench_press.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Push Up",
+    "desc": "Place your hands firmly on the ground, directly under shoulders.\nFlatten your back so your entire body is straight and slowly lower your body\nDraw shoulder blades back and down, keeping elbows tucked close to your body\nExhale as you push back to the starting position.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/push_up.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Upper Chest",
+    "name": "Incline Push Up",
+    "desc": "Stand facing bench or sturdy elevated platform.\nPlace hands on edge of bench or platform, slightly wider than shoulder width.\nSlowly lower your body until your chest almost touches the bench.\nPush body up until arms are extended.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/incline_push_up.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Lower Chest",
+    "name": "Decline Push Up",
+    "desc": "Use a bench to elevate your feet.\nPut your hands slightly wider than shoulder-width.\nSlowly lower your body until your chest almost touches the ground\nRaise your body until you almost lock your elbows.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/decline_push_up.mp4"
+  },
+  {
+    "part": "Chest",
+    "muscle": "Mid Chest",
+    "name": "Knee Push Ups",
+    "desc": "Begin in a push-up position on your knees. Break at the elbow and shoulder joint.\nLower your body, keeping elbows close.\nPush back up to the starting position.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/knee_push_ups.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Mid and Lower Back",
+    "name": "Deadlift",
+    "desc": "Stand with your mid-foot under the bar and grip the bar with your hands, about a shoulder width apart.\nBend your knees, then lift the bar by straightening your back. It is important to keep your back straight.\nStand to your full height and hold.\nLower the bar to the floor by bending your knees and keeping your back straight.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/deadlift.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats",
+    "name": "Kneeling Single Arm Row",
+    "desc": "Place one hand and one knee on a bench. Make sure you keep a flat back.\nPull the dumbbell toward the ceiling.\nMake sure to avoid any jerking or rotating.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/kneeling_single_arm_row.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Mid Back",
+    "name": "Pronated Row",
+    "desc": "Grab the barbell with an overhand grip. Hinge forward while keeping your back flat until your torso is about parallel with the ground.\nLet your arms hang freely.\nPull the bar to your torso while tucking your elbows in slightly.\nExtend your elbows fully before initiating the next rep.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/pronated_row.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats",
+    "name": "Pulldown",
+    "desc": "Grip the bar with the palms facing forward, your hands need to be spaced out at a distance wider than shoulder width.\nAs you have both arms extended in front of you holding the bar, bring your torso back around 30 degrees while sticking your chest out.\nPull the bar down to about chin level or a little lower in a smooth movement whilst squeezing the shoulder blades together.\nAfter a second of squeezing, slowly raise the bar back to the starting position when your arms are fully extended.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/pulldown.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Mid Back",
+    "name": "Underhand Pulldown",
+    "desc": "Use the Straight Bar attachment. Hold with an underhand grip.\nHold the attachment as you sit on the machine and put your legs under the leg pads.\nPull the bar to your clavicle, then raise back up until your arm are extended.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/underhand_pulldown.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Mid Back",
+    "name": "Neutral Pulldown",
+    "desc": "Use the V Bar attachment.\nHold the attachment as you sit on the machine and put your legs under the leg pads.\nPull the bar to your clavicle, then raise back up until your arm are extended.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/neutral_pulldown.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Mid Back",
+    "name": "Seated Cable Row",
+    "desc": "Sit with your back straight on the machine and grip the handles.\nPull the handles back using your arms. Your legs and torso should be at a 90° angle. Push out your chest.\nPull the handles towards your body until your hands are beside your abdomen.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/seated_cable_row.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Mid Back",
+    "name": "Landmine T Bar Rows",
+    "desc": "Grab a v bar and place it under the bar's collar.\nHinge forward with a flat back and pull your elbows straight back toward the ceiling.\nFully extend your elbows before initiating the next rep.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/landmine_t_bar_rows.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats",
+    "name": "Pullover",
+    "desc": "Grab a dumbbell and hold with both hands. Point your dumbbell at the ceiling.\nFlex at the shoulder joint while keeping your elbows mostly extended.\nFlex until you feel a stretch in your lats then bring the dumbbell back to the ceiling.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/pullover.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Mid Back",
+    "name": "Laying Incline Row",
+    "desc": "Lay on an incline bench that is between 30-45 degrees high.\nLet your arms hang freely. Pull your elbows straight back toward the ceiling.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/laying_incline_row.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Mid Back",
+    "name": "Machine Plate Loaded Row",
+    "desc": "Sit on the machine, feet flat, and grab the handles.\nPull handles towards your lower abdomen, squeezing your shoulder blades together. Keep elbows close to your body.\nSlowly return to the starting position, fully extending your arms without locking elbows. Repeat for desired reps.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_plate_loaded_row.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Mid Back",
+    "name": "Cable Rop Pullover",
+    "desc": "Use a rope attachment. Cable should be set all the way to the top of the machine.\nGrab your attachment and walk a few steps back. Push your butt back to where you are leaning forward somewhat.\nInitiate the movement with your shoulders and not your elbows. Imagine trying to pull the attachment through your thighs at the bottom.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_rope_pullover.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Mid Back",
+    "name": "Cable Bent Over Bar Pullover",
+    "desc": "You can use any attachment. Cable should be set all the way to the top of the machine.\nGrab your attachment and walk a few steps back. Push your butt back to where you are leaning forward somewhat.\nInitiate the movement with your shoulders and not your elbows. Imagine trying to pull the attachment through your thighs at the bottom.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_pullover.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Traps",
+    "name": "Silverback Shrug",
+    "desc": "Stand with your feet shoulder width apart holding dumbbells with both hands in front just past shoulder width.\nBend forward at the hips with a slight bend in your knees, keeping your back straight.\nEngage your shoulder blades, as if you are trying to touch them together.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/silverback_shrug.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Traps",
+    "name": "Silverback Barbell Shrug",
+    "desc": "Stand with your feet shoulder width apart holding the Barbell with both hands in front just past shoulder width.\nBend forward at the hips with a slight bend in your knees, keeping your back straight.\nEngage your shoulder blades, as if you are trying to touch them together.\nRelease the shrug.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_silverback_shrug.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Traps",
+    "name": "30 Degree Shrug",
+    "desc": "Hold barbell with a wide grip. Your arms should be at a roughly 30 degree angle.\nPull your shoulders towards your ears instead of straight up toward the ceiling.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/30_degree_shrug.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lower Back",
+    "name": "Back Extension",
+    "desc": "Position your thighs on the padding and hook your feet on the platform supports.\nKeeping your back straight, slowly bend at your waist until your legs and back are at a 45° angle.\nSlowly raise your body to the starting position.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/back_extension.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Upper Back",
+    "name": "Pull Ups",
+    "desc": "Grasp the bar with an overhand grip, arms and shoulders fully extended.\nPull your body up until your chin is above the bar.\nLower your body back to starting position.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/pullup.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Upper Back",
+    "name": "Assisted Pull Up",
+    "desc": "Adjust weight for assistance. Stand on platform, grip handles above shoulder-width. Knees on pad if available.\nSlowly pull up until chin is above the bar. Keep elbows close, core engaged.\nLower back with control. Pause at bottom. Repeat for reps.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/assisted_pull_up.mp4"
+  },
+  {
+    "part": "Back",
+    "muscle": "Lats and Upper Back",
+    "name": "Weighted Pull Ups",
+    "desc": "Grasp the bar with an overhand grip, arms and shoulders fully extended. Weight hanging between your legs.\nPull your body up until your chin is above the bar.\nLower your body back to starting position.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/weighted_pull_ups.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Overhead Press",
+    "desc": "Take a roughly shoulder width grip. There should be a straight line from your elbow to fist (vertical forearms).\nPull your chin back and press the weight toward the ceiling by extending at the elbow joint and flexing at the shoulder joint.\nPress until your elbows are extended and push your head forward slightly.\nReturn to the start position with control. Pulling your chin back to allow the bar to pass your face safely.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/overhead_press.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Seated Overhead Press",
+    "desc": "Sit on a bench with back support. Raise the dumbbells to shoulder height with your palms forward.\nRaise the dumbbells upwards and pause at the contracted position.\nLower the weights back to starting position.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/seated_overhead_press.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Upright Row",
+    "desc": "Take a double overhand roughly shoulder width grip.\nPull your elbows straight up the ceiling. Aim to get the bar to chin level or slightly higher.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/upright_row.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Front Raise",
+    "desc": "Grab two dumbbells while standing upright with the dumbbells at your side.\nRaise the two dumbbells with your elbows being fully extended until the dumbbells are eye level.\nLower the weights in a controlled manner to the starting position and repeat.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/front_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Plate Front Raise",
+    "desc": "Stand with feet shoulder-width apart and the plate in front of the torso, palms facing the thighs.\nKeeping the elbows slightly bent, lift the plate up to the front of the body.\nRaise the plate up until the arms are fully extended, maintaining control of the plate.\nLower the plate back to the starting position and repeat for desired reps.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/plate_front_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Cable Bar Front Raise",
+    "desc": "Face away from the cables.\nWith your elbows extended raise your fists straight up to the ceiling until they are at eye level.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_bar_front_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Cable Rope Front Raise",
+    "desc": "Face away from the cables. Use a rope attachment.\nWith your elbows extended raise your fists straight up to the ceiling until they are at eye level.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_rope_front_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Front Delts",
+    "name": "Arnold Press",
+    "desc": "Stand with both palms facing you.\nBegin to press the dumbbells to the ceiling while rotating your palms.\nWhen you reach elbow extension, your palms should be facing forward.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/arnold_press.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Side Delts",
+    "name": "Lateral Raise",
+    "desc": "Stand up straight with dumbbells at either side, palms facing your hips.\nRaise your arms on either side with a slight bend in your elbow until they are parallel with the floor. Pause at the top of the motion.\nSlowly return your arms down to starting position.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/lateral_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Side Delts",
+    "name": "Bayesian Lateral Raise",
+    "desc": "Lay on an incline bench and let your arms freely.\nLateral raise your arms straight out to the side until your arms are about parallel with the ground.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/bayesian_lateral_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Side Delts",
+    "name": "Standing Bayesian Lateral Raise",
+    "desc": "Stand tall on lean slightly forward.\nLateral raise your arms straight out to the side until your arms are about parallel with the ground.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/standing_bayesian_lateral_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Side Delts",
+    "name": "Cable Low Single Arm Lateral Raise",
+    "desc": "Use a handle attachment with the cable set all the way to the bottom of the machine.\nYou should vertically abduct at the shoulder raising your arm straight out to the side.\nRaise until your arm is parallel with the ground and then back to the starting position.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_low_single_arm_lateral_raise.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Rear Delts",
+    "name": "Cable Rope Face Pulls",
+    "desc": "Facing the pulley, pull the weight towards you while keeping your arms parallel to the ground.\nPull your hands back to both sides of your head and hold the position.\nSlowly return weight to starting position. Repeat.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_rope_face_pulls.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Rear Delts",
+    "name": "Machine Reverse Fly",
+    "desc": "Sit on machine and press your chest into the pad.\nGrab the handles with an overhand grip. Keep your elbows mostly extended.\nBring your arms backwards and squeeze your scapula together.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_reverse_fly.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Rear Delts",
+    "name": "Seated Rear Delt Fly",
+    "desc": "With dumbbells in either hand, bend your knees with your feet slightly bowed out. Arch your back above your knees, and start with the weights touching in front of your chest.\nWith bent elbows, raise your arms up to shoulder level, pausing at the at the end of the motion.\nSlowly lower your arms back to starting position.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/seated_rear_delt_fly.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Rear Delts",
+    "name": "Cable High Internally Rotated Reverse Fly",
+    "desc": "Use a handle attachment or no attachment at all. The cable should be set to the top.\nWalk a few steps away with the cable coming from the opposing side of the working arms. Internally rotate the shoulders.\nFrom there, your shoulders should horizontally abduct and adduct, while your elbows stay in a fixed position.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_high_internally_rotated_reverse_fly.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Rear Delts",
+    "name": "Rope Kneeling Face Pull",
+    "desc": "Start with the cables at the top. Use a rope attachment. Fall to a half kneeling position.\nPull the metal piece in the middle of the rope to the bridge of your nose.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/rope_kneeling_face_pull.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Rear Delts",
+    "name": "Seated Rear Delt Row",
+    "desc": "Sit on a bench. Put your chest in your lap. Try to get your torso as close to parallel with the ground as your mobility will allow for.\nLet your arms hang in front of you. Pull your elbows back towards the ceiling while flaring your elbows outward.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/seated_rear_delt_row.mp4"
+  },
+  {
+    "part": "Shoulders",
+    "muscle": "Rear Delts",
+    "name": "Cable External Rotation",
+    "desc": "Hold the cable handle in one hand, elbow bent at 90 degrees going across your torso.\nRotate your arm outward, keeping your elbow stable.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_external_rotation.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Short Head Bicep",
+    "name": "Barbell Curl",
+    "desc": "While holding the upper arms stationary, curl the weights forward while contracting the biceps as you breathe out.\nContinue the movement until your biceps are fully contracted and the bar is at shoulder level.\nHold the contracted position for a second and squeeze the biceps hard.\nSlowly bring the weight back down to the starting position.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_curl.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Short Head Bicep",
+    "name": "Preacher Curl",
+    "desc": "Sit at preacher bench, hold dumbbells in each hand with arm extended, palm facing up.\nCurl dumbbells towards shoulder, keeping upper arm stationary and elbows in.\nLower dumbbell slowly back to start.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/preacher_curl.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Short Head Bicep",
+    "name": "Hammer Curl",
+    "desc": "Hold the dumbbells with a neutral grip (thumbs facing the ceiling).\nSlowly lift the dumbbell up to chest height\nReturn to starting position and repeat.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/hammer_curl.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Short Head Bicep",
+    "name": "Cable Rope Hammer Curl",
+    "desc": "Use a rope attachment. The cable should be set all the way to the bottom of the machine.\nFace away from the cable machine. Stagger your stance so you have a better base of support.\nUse a neutral grip thumb facing up pinky-facing down). Flex at the elbow and extend.",
+    "equipment": "Cable",
+    "asset": null
+  },
+  {
+    "part": "Arms",
+    "muscle": "Short Head Bicep",
+    "name": "Cable Bayesian Curl",
+    "desc": "Use a handle attachment. The cable should be set all the way to the bottom of the machine.\nFace away from the cable machine.\nStagger your stance so you have a better base of support. Face your palm forward. Flex at the elbow and extend.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_bayesian_curl.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Short Head Bicep",
+    "name": "EZ Bar Preacher Curl",
+    "desc": "Position yourself on preacher bench; grasp EZ bar with underhand grip, elbows extended.\nSlowly curl bar towards shoulders; keep upper arms stationary, focus on biceps.\nLower bar back to starting position; maintain control, repeat for reps.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/ez_bar_preacher_curl.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Long Head Bicep",
+    "name": "Incline Curl",
+    "desc": "Hold the dumbbells with an underhand grip. Seated on an incline bench.\nSlowly lift the dumbbell up to chest height\nReturn to starting position and repeat.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/incline_curl.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Long Head Bicep",
+    "name": "Cable Bar Curl",
+    "desc": "Use a bar attachment. The cable should be set all the way to the bottom of the machine.\nFace the cable machine.\nStagger your stance so you have a better base of support. Face your palm forward. Flex at the elbow and extend.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_bar_curl.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Long Head Tricep",
+    "name": "Cable Rope Overhead Tricep Extension",
+    "desc": "You can use any attachment. The cable should be all the way to the bottom of the machine. Face away from the machine.\nPoint your elbows straight up toward the ceiling.\nFrom there, extend your elbows until your fists are pointed straight toward the ceiling.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_rope_overhead_tricep_extension.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Long Head Tricep",
+    "name": "Barbell Skullcrusher",
+    "desc": "Take a shoulder width grip. Break at the elbows. Try to keep your elbows tucked in. Don't let them flare out.\nStop the bar a few inches from your forehead and extend your elbows back up.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_skullcrusher.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Long Head Tricep",
+    "name": "Dumbbell Seated Overhead Tricep Extension",
+    "desc": "Sit on the bench and hold a dumbbell with both hands. Raise the dumbbell overhead at arms length, holding the weight up with the palms of your hands.\nKeep your elbows in while you lower the weight behind your head, your upper arms stationary.\nRaise the weight back to starting position.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_seated_overhead_tricep_extension.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Long Head Tricep",
+    "name": "Dumbbell Single Arm Overhead Tricep Extension",
+    "desc": "Stand tall with a single dumbbell extended overhead.\nFlex at the elbow letting the dumbbell travel behind your body.\nTry not to let your elbow flare outward.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_single_arm_overhead_tricep_extension.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Cable Rope Pushdown",
+    "desc": "The cable should be set all the way at the top of the machine.\nMake sure to keep your upper arm glued at your side. Extend your elbows until you feel your triceps contract.",
+    "equipment": "Cable",
+    "asset": null
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Barbell Close Grip Bench Press",
+    "desc": "Lay flat on the bench with your feet on the ground. With a narrow grip on the bar, straighten your arms\nLower the bar to your lower-mid chest\nSlowly raise the bar until you've locked your elbows.",
+    "equipment": "Barbell",
+    "asset": null
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Bench Dips",
+    "desc": "Grip the edge of the bench with your hands, Keep your feet together and legs straight.\nLower your body straight down.\nSlowly press back up to the starting point.\nTIP: Make this harder by raising your feet off the floor and adding weight.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/bench_dips.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Diamond Push Ups",
+    "desc": "Position your index fingers and thumbs so they are touching, forming a diamond shape\nUse a standard push up position\nLower your chest towards your hands, keep your elbows close to your body\nStop just before your chest touches the floor, then push back up to the starting position.",
+    "equipment": "Bodyweight",
+    "asset": null
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Cable Bar Pushdown",
+    "desc": "Use the bar attachment. The cable should be set all the way at the top of the machine.\nMake sure to keep your upper arm glued at your side. Extend your elbows until you feel your triceps contract.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_bar_pushdown.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Cable Tricep Kickback",
+    "desc": "Use a handle attachment. The cable should be set to hip height.\nHinge forward. Make sure to keep your upper arm glued at your side. Extend your elbows until you feel your triceps contract.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_tricep_kickback.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Cable Single Arm Rope Pushdown",
+    "desc": "Use the rope attachment. The cable should be set all the way at the top of the machine.\nMake sure to keep your upper arm glued at your side. Extend your elbows until you feel your triceps contract.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_single_arm_rope_pushdown.mp4"
+  },
+  {
+    "part": "Arms",
+    "muscle": "Lateral Head Triceps",
+    "name": "Cable Single Arm Pushdown",
+    "desc": "Use a handle attachment. The cable should be set all the way at the top of the machine.\nMake sure to keep your upper arm glued at your side. Extend your elbow until you feel your tricep contract.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/cable_single_arm_pushdown.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Barbell Squat",
+    "desc": "Stand with your feet shoulder-width apart. Maintain the natural arch in your back, squeezing your shoulder blades and raising your chest.\nGrip the bar across your shoulders and support it on your upper back. Unwrack the bar by straightening your legs, and take a step back.\nBend your knees as you lower the weight without altering the form of your back until your hips are below your knees.\nRaise the bar back to starting position, lift with your legs and exhale at the top.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_squat.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Smith Machine Squat",
+    "desc": "Stand with your feet shoulder-width apart. Maintain the natural arch in your back and put the bar on your back. Squeezing your shoulder blades and raise your chest.\nGrip the bar across your shoulders and support it on your upper back. Unwrack the smith machine by straightening your legs.\nBend your knees as you lower the weight without altering the form of your back until your hips are below your knees.\nRaise the bar back to starting position, lift with your legs and exhale at the top.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/smith_machine_squat.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Smith Machine Sissy Squat",
+    "desc": "Stand facing away from the machine, positioning your feet slightly wider than shoulder-width apart to provide a stable base, and then reach behind you to firmly grip the bar with both hands, maintaining an overhand grip.\nInitiate the movement by leaning backward, allowing your upper body to incline while simultaneously bending your knees. As you descend, maintain control\nDrive through your quadriceps while pushing your hips forward, gradually straightening your knees. Maintain a slow, controlled pace",
+    "equipment": "Machine",
+    "asset": "assets/exercise/smith_machine_sissy_squat.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Bulgarian Split Squat",
+    "desc": "Find a box or bench that is roughly knee height or a few inches lower. (The lower the box is the lower the mobility requirement).\nYou can either place your toes or the top of your foot on the box. Point your front foot forward or slightly turned outwards and break at the knees and hips simultaneously.\nAim to get your front leg to hit parallel depth (hamstring parallel with the ground) or lower.\nThe further forward your front foot is, the longer the Range of Motion is at your hips. The further back your front foot is, the longer the ROM at your knees.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/bulgarian_split_squat.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Machine Hip Adduction",
+    "desc": "Sit in the machine with your legs apart, pads against your outer thighs. Adjust the seat and pad position comfortably.\nSlowly squeeze your legs together, focusing on using your Quads muscles. Pause when the pads are close together.\nSlowly return to the starting position, maintaining control. Avoid letting the weights slam. Repeat for desired reps and sets.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_hip_adduction.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Forward Lunges",
+    "desc": "Step forward with one leg.\nLower your body until your rear knee nearly touches the ground.\nEnsure you remain upright, and your front knee stay above the front foot.\nPush off the floor with your front foot until you return to the starting position. Switch legs",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/forward_lunges.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Machine Leg Extension",
+    "desc": "Sit on the machine with your back against the cushion and adjust the machine you are using so that your knees are at a 90 degree angle at the starting position.\nRaise the weight by extending your knees outward, then lower your leg to the starting position. Both movements should be done in a slow, controlled motion.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_leg_extension.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads",
+    "name": "Dumbbell Goblet Squat",
+    "desc": "Hold the weight tucked into your upper chest area, keeping your elbows in. Your feet should be slightly wider than shoulder width.\nSink down into the squat, keeping your elbows inside the track of your knees.\nPush through your heels while keeping your chest up and return to starting position.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_goblet_squat.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Quads and Hamstrings",
+    "name": "Machine Leg Press",
+    "desc": "Place your legs on the platform with your feet at shoulder width.\nRelease the weight and extend your legs fully, without locking your knees.\nLower the weight until your legs are at a 90° angle (but DO NOT allow your butt and lower back to rise off of the pad. This will put your lower back in a rounded position, which is very dangerous.)\nRaise the weight back to starting position.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_leg_press.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Hamstrings",
+    "name": "Barbell Stiff Leg Deadlifts",
+    "desc": "Stand with a barbell at your shins with your feet shoulder width apart.\nBend forward at your hips and keep your knees as fully extended as possible.nGrab the barbell and then extend your hips while maintaining a straight back.\nFrom the standing position, lower the weight in a controlled manner.\nYou can either lower the weight to the floor or before you touch the floor, depending on your mobility.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_stiff_leg_deadlifts.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Hamstrings",
+    "name": "Dumbbell Romanian Deadlift",
+    "desc": "Stand with a shoulder width stance. Push your butt back while leaving your knees MOSTLY extended.\nYou should feel a stretch in your hamstrings. When you feel the stretch, push your hips forward to complete the rep.\nDo not push your hips all the way forward. This will hyperextend your spine. Just go to a normal standing position.",
+    "equipment": "Dumbbell",
+    "asset": "assets/exercise/dumbbell_romanian_deadlift.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Hamstrings",
+    "name": "Barbell Romanian Deadlift",
+    "desc": "Take a shoulder width, double overhand or mixed grip.\nPush your hips back while leaving your knees mostly extended. Look for a stretch in your hamstrings.\nWhen you feel the stretch, push your hips forward until you're back in a standing position.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_romanian_deadlift.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Hamstrings",
+    "name": "Machine Hamstring Curl",
+    "desc": "Lay down on the machine, placing your legs beneath the padded lever. Position your legs so that the padded lever is below your calve muscles.\nSupport yourself by grabbing the side handles of the machine, and slowly raise the weight with your legs, toes pointed straight.\nPause at the apex of the motion, then slowly return to starting position.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_hamstring_curl.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Hamstrings",
+    "name": "Machine Seated Hamstring Curl",
+    "desc": "Adjust the back pad and ankle pad to suit your height.\nDisengage the knee pad and lower it as far as you can.\nFlex your knees against resistance, then extend until you feel a stretch in your hamstrings.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_seated_hamstring_curl.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Calves",
+    "name": "Machine Seated Calf Raises",
+    "desc": "Get comfortable on the machine, then place your lower thighs beneath the padded lever. Place your toes and the balls of your feet onto the foot supports.\nPrevent the weight from slipping forward by gripping the handles, and release the safety bar. Lower the weight until your calves are extended.\nPush your heels up to lift the padded lever and hold the contracted position, then slowly lower back down to the starting position. Repeat.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_seated_calf_raises.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Calves",
+    "name": "Machine Standing Calf Raises",
+    "desc": "Adjust the machine in accordance with your height and place your shoulders underneath the padded lever.\nThe balls of your feet should be supporting your weight on the calve block, your heels extending off of it.\nExtend your heels upwards while keeping your knees stationary, and pause at the contracted position.\nSlowly return to the starting position. Repeat.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/machine_standing_calf_raises.mp4"
+  },
+  {
+    "part": "Legs",
+    "muscle": "Glutes",
+    "name": "Barbell Hip Thrust",
+    "desc": "Sit on the ground with a bench behind you. Have the barbell over your legs just above your hips.\nLean back against the bench so that your shoulders are resting upon it, stretch your arms out to either side using the bench as support.\nRaise the weight by driving through your feet and extending your hips upwards. Support the weight with your shoulders and feet.\nSlowly extend as far as you can, and then slowly return to the starting position.",
+    "equipment": "Barbell",
+    "asset": "assets/exercise/barbell_hip_thrust.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Stationary Bike",
+    "desc": "Hold the handles and maintain a neutral spine.\nPedal at a moderate pace and try to minimise rocking back and forth.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/stationary_bike.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Jump Rope",
+    "desc": "Hold handles, elbows close, and jump with both feet together.\nRotate wrists to swing the rope over your head.\nJump as it reaches your feet, keeping a steady rhythm.",
+    "equipment": "Cable",
+    "asset": "assets/exercise/jump_rope.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Jumping Jacks",
+    "desc": "Stand with feet together, arms at your sides, ready to jump.\nJump while spreading legs and raising arms overhead.\nReturn to starting position with legs together and arms at your sides. Repeat.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/jumping_jacks.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Criss Cross Jacks",
+    "desc": "Perform a jumping jack while crossing the feet.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/criss_cross_jacks.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Knee Taps",
+    "desc": "Stand straight, feet hip-width apart, engage core.\nLift knees alternately, tap with same side hand.\nContinue rhythmically, maintain posture, increase speed as able.",
+    "equipment": "Bodyweight",
+    "asset": "assets/exercise/knee_taps.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Treadmill Walk",
+    "desc": "Get the treadmill up to a speed where you are doing a walk.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/treadmill_walk.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Treadmill Sprint",
+    "desc": "Get the treadmill up to a speed where you are doing a sprint.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/treadmill_sprint.mp4"
+  },
+  {
+    "part": "Cardio",
+    "name": "Stair Climber",
+    "desc": "Step onto step, grip handles lightly, maintain tall posture and neutral spine.\nDrive through midfoot, alternate steps smoothly, avoid leaning heavily on handles.\nSet moderate pace, breathe rhythmically, keep knees tracking over toes.",
+    "equipment": "Machine",
+    "asset": "assets/exercise/stair_climber.mp4"
+  }
+]

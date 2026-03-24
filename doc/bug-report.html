@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitandFuel — Bug Audit Report</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181a20;
+      --surface2: #1e2028;
+      --border: #2a2d38;
+      --text: #d9d9d9;
+      --muted: #7e8090;
+      --yellow: #fcd535;
+      --red: #e53e3e;
+      --orange: #f6ad55;
+      --blue: #63b3ed;
+      --green: #68d391;
+      --purple: #b794f4;
+      --critical: #e53e3e;
+      --high: #f6802a;
+      --medium: #ecc94b;
+      --low: #68d391;
+      --radius: 8px;
+      --code-bg: #12141c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    a { color: var(--yellow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(135deg, #1a1c24 0%, #181a20 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 36px 48px;
+    }
+    .header h1 {
+      font-size: 2rem;
+      color: var(--yellow);
+      letter-spacing: 0.03em;
+    }
+    .header .subtitle {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
+    .header .meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .header .meta-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .header .meta-item span { color: var(--text); font-weight: 600; }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 1280px; margin: 0 auto; padding: 32px 48px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 24px; } }
+
+    /* ===== SECTIONS ===== */
+    .section { margin-bottom: 48px; }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--yellow);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+    .section-title .icon { margin-right: 8px; }
+
+    /* ===== EXECUTIVE SUMMARY ===== */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 700px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+    .summary-card .count {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .summary-card .label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+    .count-critical { color: var(--critical); }
+    .count-high     { color: var(--high); }
+    .count-medium   { color: var(--medium); }
+    .count-low      { color: var(--low); }
+    .count-total    { color: var(--yellow); }
+
+    .stability-banner {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--high);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      color: var(--text);
+      font-size: 0.93rem;
+    }
+
+    /* ===== BUG CARDS ===== */
+    .bug-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .bug-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .bug-id {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-family: monospace;
+      min-width: 40px;
+    }
+    .bug-title {
+      font-weight: 700;
+      font-size: 1rem;
+      flex: 1;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .badge-critical { background: rgba(229,62,62,0.18); color: var(--critical); border: 1px solid rgba(229,62,62,0.4); }
+    .badge-high     { background: rgba(246,128,42,0.18); color: var(--high);     border: 1px solid rgba(246,128,42,0.4); }
+    .badge-medium   { background: rgba(236,201,75,0.18); color: var(--medium);   border: 1px solid rgba(236,201,75,0.4); }
+    .badge-low      { background: rgba(104,211,145,0.18); color: var(--low);     border: 1px solid rgba(104,211,145,0.4); }
+
+    .badge-cat  { background: rgba(99,179,237,0.13); color: var(--blue);   border: 1px solid rgba(99,179,237,0.3); }
+    .badge-repro { background: rgba(183,148,244,0.13); color: var(--purple); border: 1px solid rgba(183,148,244,0.3); }
+
+    .bug-body { padding: 20px; }
+    .bug-meta {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .bug-section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      margin-top: 14px;
+    }
+    .bug-body p, .bug-body li { color: var(--text); font-size: 0.9rem; }
+    .bug-body ol, .bug-body ul { padding-left: 20px; }
+    .bug-body li { margin-bottom: 4px; }
+
+    /* ===== CODE BLOCKS ===== */
+    pre, code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.82rem;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin-top: 8px;
+      line-height: 1.55;
+    }
+    code {
+      background: rgba(255,255,255,0.07);
+      border-radius: 3px;
+      padding: 1px 5px;
+      color: var(--yellow);
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+
+    .line-del { color: var(--critical); }
+    .line-add { color: var(--green); }
+    .line-num { color: var(--muted); user-select: none; margin-right: 14px; }
+
+    /* ===== FILE REF ===== */
+    .file-ref {
+      display: inline-block;
+      background: rgba(99,179,237,0.1);
+      border: 1px solid rgba(99,179,237,0.25);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--blue);
+      margin: 2px 0;
+    }
+
+    /* ===== TABLE ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 10px;
+    }
+    th {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+    /* ===== METHODOLOGY ===== */
+    .method-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+    }
+    .method-card h4 { color: var(--yellow); margin-bottom: 8px; font-size: 0.92rem; }
+    .method-card p, .method-card li { font-size: 0.88rem; color: var(--muted); }
+    .method-card ul { padding-left: 18px; }
+    .method-card li { margin-bottom: 3px; }
+
+    /* ===== MODULE SECTION ===== */
+    .module-chip {
+      display: inline-block;
+      background: rgba(252,213,53,0.1);
+      border: 1px solid rgba(252,213,53,0.3);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.78rem;
+      color: var(--yellow);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    /* ===== TOC ===== */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .toc h3 { color: var(--yellow); margin-bottom: 12px; font-size: 0.95rem; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin-bottom: 5px; font-size: 0.88rem; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* fix box */
+    .fix-box {
+      background: rgba(104,211,145,0.06);
+      border: 1px solid rgba(104,211,145,0.2);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-top: 10px;
+    }
+    .fix-box .fix-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .verify-box {
+      background: rgba(99,179,237,0.06);
+      border: 1px solid rgba(99,179,237,0.2);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-top: 10px;
+    }
+    .verify-box .verify-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--blue);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .verify-box p { font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>🔍 FitandFuel — Bug Audit Report</h1>
+  <div class="subtitle">Comprehensive code analysis, static scan, and test execution report</div>
+  <div class="meta">
+    <div class="meta-item">Generated: <span>2026-03-24</span></div>
+    <div class="meta-item">Flutter: <span>3.29.0 (Dart 3.7.0)</span></div>
+    <div class="meta-item">Project: <span>fit_and_fuel</span></div>
+    <div class="meta-item">Platform: <span>Android / iOS</span></div>
+    <div class="meta-item">State Management: <span>GetX 4.7.2</span></div>
+    <div class="meta-item">Static Analyzer: <span>flutter analyze — 0 issues</span></div>
+    <div class="meta-item">Test Suite: <span>1 test — 1 FAILED</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== TOC ===== -->
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#summary">Executive Summary</a></li>
+      <li><a href="#method">Testing Methodology</a></li>
+      <li><a href="#bugs">Confirmed Bug List (Prioritized)</a></li>
+      <li><a href="#modules">Bugs by Module</a></li>
+      <li><a href="#crash-risks">Crash Risks</a></li>
+      <li><a href="#edge-cases">Edge Case Failures</a></li>
+      <li><a href="#static">Static Code Errors</a></li>
+      <li><a href="#tests">Test Failures</a></li>
+      <li><a href="#fixes">High-Confidence Fix Summary</a></li>
+      <li><a href="#appendix">Appendix</a></li>
+    </ol>
+  </div>
+
+  <!-- ===== EXECUTIVE SUMMARY ===== -->
+  <div class="section" id="summary">
+    <div class="section-title"><span class="icon">📊</span>Executive Summary</div>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="count count-total">14</div>
+        <div class="label">Total Bugs</div>
+      </div>
+      <div class="summary-card">
+        <div class="count count-critical">2</div>
+        <div class="label">Critical</div>
+      </div>
+      <div class="summary-card">
+        <div class="count count-high">5</div>
+        <div class="label">High</div>
+      </div>
+      <div class="summary-card">
+        <div class="count count-medium">5</div>
+        <div class="label">Medium</div>
+      </div>
+      <div class="summary-card">
+        <div class="count count-low">2</div>
+        <div class="label">Low</div>
+      </div>
+    </div>
+
+    <div class="stability-banner">
+      <strong>Overall Stability Assessment:</strong> The application is <strong>unstable for production use</strong>.
+      Two critical null-crash bugs exist in the Recipe Detail screen that will crash the app whenever a recipe with
+      null <code>ingredients</code>, <code>steps</code>, or <code>tips</code> data is opened.
+      The Exercise filter function contains an unconditional null-assertion crash risk. Navigation to Edit Profile
+      is permanently broken (route commented out). Stream listeners leak memory across sessions. The automated
+      test suite is entirely invalid — the only test is the Flutter template counter test which will always fail
+      against this application. Core features (music playback, calorie calculator, exercise video) contain
+      additional logic and state bugs. Immediate fixes are required before any release.
+    </div>
+  </div>
+
+  <!-- ===== TESTING METHOD ===== -->
+  <div class="section" id="method">
+    <div class="section-title"><span class="icon">🧪</span>Testing Methodology</div>
+    <div class="two-col">
+      <div class="method-card">
+        <h4>Commands Executed</h4>
+        <ul>
+          <li><code>flutter analyze</code> — static analysis (0 issues)</li>
+          <li><code>flutter test</code> — unit/widget tests (1 fail)</li>
+          <li>Full manual source code inspection of all <code>lib/</code> files</li>
+          <li>Logic trace through all controller / service / view layers</li>
+          <li>Null-safety path analysis for all nullable fields and dereferences</li>
+        </ul>
+      </div>
+      <div class="method-card">
+        <h4>Scope Covered</h4>
+        <ul>
+          <li>All feature screens (Home, Exercise, Recipe, Music, Calorie Calc, Profile)</li>
+          <li>All GetX controllers and bindings</li>
+          <li>All data models and JSON services</li>
+          <li>Navigation / routing (routes.dart)</li>
+          <li>State management patterns (Obx, RxList, StreamSubscriptions)</li>
+          <li>Async operations, stream subscriptions, dispose lifecycles</li>
+          <li>pubspec.yaml, AndroidManifest, build.gradle.kts</li>
+          <li>Widget structure, UI logic, and conditional rendering</li>
+        </ul>
+      </div>
+      <div class="method-card">
+        <h4>Flutter Environment</h4>
+        <ul>
+          <li>Flutter 3.29.0, Dart 3.7.0, DevTools 2.42.2</li>
+          <li>Channel: stable</li>
+          <li>Platform: Windows 11 (analysis), target Android / iOS</li>
+          <li>compileSdk: 36, minSdk: 23</li>
+          <li>Kotlin 1.7+, Java 17</li>
+        </ul>
+      </div>
+      <div class="method-card">
+        <h4>Limitations</h4>
+        <ul>
+          <li>No physical device or emulator was available for runtime execution during this audit</li>
+          <li>Audio playback and background media service tested via code path analysis only</li>
+          <li>Video thumbnail generation could not be runtime-verified</li>
+          <li>All findings are evidence-backed through direct source code inspection</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BUG LIST ===== -->
+  <div class="section" id="bugs">
+    <div class="section-title"><span class="icon">🐛</span>Confirmed Bug List (Prioritized)</div>
+
+    <!-- BUG-01 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-01</span>
+        <span class="bug-title">Null crash on Recipe Detail — wrong OR operator causes force-unwrap of null lists</span>
+        <span class="badge badge-critical">Critical</span>
+        <span class="badge badge-cat">Crash / Null-Safety</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+        <div class="bug-meta"></div>
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          In <code>recipe.dart</code>, three conditional guards use the <code>||</code> (OR) operator instead of <code>&amp;&amp;</code> (AND).
+          When <code>recipe.ingredients</code>, <code>recipe.steps</code>, or <code>recipe.tips</code> is <code>null</code>,
+          the first condition (<code>!= null</code>) evaluates to <code>false</code>.
+          Due to <code>||</code>, Dart then evaluates the second sub-expression, which force-unwraps the same nullable field with <code>!</code>.
+          This produces a <strong>Null check operator used on a null value</strong> runtime exception and crashes the app.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/recipe/recipe.dart : 243</span><br/>
+        <span class="file-ref">lib/features/recipe/recipe.dart : 307</span><br/>
+        <span class="file-ref">lib/features/recipe/recipe.dart : 408</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>Open the app</li>
+          <li>Navigate to the Recipe tab</li>
+          <li>Tap any recipe whose JSON data has a null <code>ingredients</code>, <code>steps</code>, or <code>tips</code> field</li>
+          <li>The Recipe Detail screen opens and immediately crashes</li>
+        </ol>
+
+        <div class="bug-section-label">Observed Result</div>
+        <p>App crashes with: <code>Null check operator used on a null value</code></p>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>Sections with null data are silently hidden; the rest of the recipe detail is displayed normally.</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <p>The logical operator is <code>||</code> (OR) when it must be <code>&amp;&amp;</code> (AND). The intent is "show the section only if the list is non-null AND non-empty". With OR, when the list is null, the false left-hand side causes evaluation of the right-hand side, which crashes.</p>
+        <pre><span class="line-num">243</span><span class="line-del">- if (recipe.ingredients != null || recipe.ingredients!.isNotEmpty) ...[</span>
+<span class="line-num">307</span><span class="line-del">- if (recipe.steps != null || recipe.steps!.isNotEmpty) ...[</span>
+<span class="line-num">408</span><span class="line-del">- if (recipe.tips != null || recipe.tips!.isNotEmpty) ...[</span></pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-num">243</span><span class="line-add">+ if (recipe.ingredients != null &amp;&amp; recipe.ingredients!.isNotEmpty) ...[</span>
+<span class="line-num">307</span><span class="line-add">+ if (recipe.steps != null &amp;&amp; recipe.steps!.isNotEmpty) ...[</span>
+<span class="line-num">408</span><span class="line-add">+ if (recipe.tips != null &amp;&amp; recipe.tips!.isNotEmpty) ...[</span></pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Open a recipe with null ingredients/steps/tips. Confirm sections are hidden without crash. Open a recipe with populated lists and confirm they render correctly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-02 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-02</span>
+        <span class="bug-title">Exercise filter crashes on null muscle field — unconditional null-assertion</span>
+        <span class="badge badge-critical">Critical</span>
+        <span class="badge badge-cat">Crash / Null-Safety</span>
+        <span class="badge badge-repro">Always (when muscle is null)</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          In the <code>filter()</code> method of <code>exercise.dart</code>, the expression <code>e.muscle!.contains(selectedMuscle)</code>
+          force-unwraps <code>e.muscle</code>, which is declared as <code>String?</code> in <code>ExerciseModel</code>.
+          If any exercise in the JSON data has a null or absent <code>muscle</code> field, this throws
+          <strong>Null check operator used on a null value</strong>.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/exercise/exercise.dart : 60</span><br/>
+        <span class="file-ref">lib/features/exercise/model/model.dart : 8</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>Navigate to any exercise category from the Home screen</li>
+          <li>The Exercise screen loads and immediately calls <code>filter()</code> via <code>Obx</code></li>
+          <li>If any loaded exercise has <code>muscle: null</code>, the app crashes during the build phase</li>
+          <li>Also reproducible by selecting a muscle filter after data loads</li>
+        </ol>
+
+        <div class="bug-section-label">Observed Result</div>
+        <p>App crash: <code>Null check operator used on a null value</code> inside <code>filter()</code></p>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>Exercises with a null muscle field are excluded from results or treated as non-matching when a muscle filter is active.</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">56</span>  filteredExercises = exercises.where((e) {
+<span class="line-num">57</span>    final muscleMatch =
+<span class="line-num">58</span>        selectedMuscle.isEmpty
+<span class="line-num">59</span>            ? true
+<span class="line-num">60</span><span class="line-del">-           : e.muscle!.contains(selectedMuscle);  // crash if e.muscle == null</span></pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+           : (e.muscle?.contains(selectedMuscle) ?? false);</span></pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Navigate to an exercise category. Select a muscle filter. Confirm no crash occurs even if an exercise entry lacks a muscle value.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-03 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-03</span>
+        <span class="bug-title">Edit Profile navigation crashes — route page is commented out</span>
+        <span class="badge badge-high">High</span>
+        <span class="badge badge-cat">Navigation</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          The Profile screen calls <code>Get.offAllNamed(MyRoutes.editProfileRoute)</code> when the user taps "Edit Profile".
+          However, the corresponding <code>GetPage</code> for <code>/EditProfile</code> is commented out in <code>routes.dart</code> (line 64).
+          GetX throws a navigation exception: <strong>"No registered routes found for: /EditProfile"</strong>.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/profile/profile.dart : 86</span><br/>
+        <span class="file-ref">lib/routes/routes.dart : 64</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>Open the app</li>
+          <li>Navigate to the Profile screen (via any route that reaches it, e.g., from About Us back nav)</li>
+          <li>Tap "Edit Profile"</li>
+          <li>GetX throws an exception — navigation fails</li>
+        </ol>
+
+        <div class="bug-section-label">Observed Result</div>
+        <p>Navigation exception; the screen does not change or a GetX error overlay appears.</p>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>The Edit Profile screen opens.</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">64</span><span class="line-del">- // GetPage(name: editProfileRoute, page: () => const EditProfile()),</span></pre>
+        <p>The GetPage is commented out, but the navigation call in <code>profile.dart:86</code> is active.</p>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <p>Either uncomment the route (and implement <code>EditProfile</code>), or disable the "Edit Profile" button with a <code>TODO</code> comment until the page is implemented.</p>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Tap "Edit Profile" on the Profile screen. Confirm navigation succeeds or button is disabled.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-04 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-04</span>
+        <span class="bug-title">Stream subscription leaked in MusicState — 4th listener never cancelled</span>
+        <span class="badge badge-high">High</span>
+        <span class="badge badge-cat">State / Memory Leak</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          In <code>music.dart</code>, <code>initState</code> subscribes to four streams from the <code>AudioPlayer</code>.
+          Three subscriptions are stored in named variables (<code>idxSub</code>, <code>playerStateSub</code>, <code>playingSub</code>) and cancelled
+          in <code>dispose()</code>. However, the fourth subscription — <code>player.sequenceStateStream.listen(...)</code> — is not stored
+          and cannot be cancelled. This listener accumulates across widget rebuilds (e.g., navigating away and back),
+          and each active listener calls <code>setState()</code> on the widget even after it is disposed.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/music/music.dart : 62–75</span><br/>
+        <span class="file-ref">lib/features/music/music.dart : 79–87 (dispose)</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>Open the Music tab</li>
+          <li>Start playing a track</li>
+          <li>Navigate to another tab (e.g., Home)</li>
+          <li>Return to Music tab several times</li>
+          <li>Observe: multiple stale listeners call <code>setState</code> potentially after the widget is disposed</li>
+        </ol>
+
+        <div class="bug-section-label">Observed Result</div>
+        <p>Memory leak; potential "setState after dispose" error in debug mode. Unexpected song metadata updates after navigating away.</p>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>All stream listeners are cancelled when <code>dispose()</code> is called.</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">62</span><span class="line-del">-    player.sequenceStateStream.listen((state) {  // return value discarded</span>
+<span class="line-num">63</span>       ...
+<span class="line-num">75</span>     });
+<span class="line-num">  </span>
+<span class="line-num">  </span>  // In dispose():
+<span class="line-num">83</span>     idxSub?.cancel();
+<span class="line-num">84</span>     playerStateSub?.cancel();
+<span class="line-num">85</span>     playingSub?.cancel();
+<span class="line-num">  </span>  <span class="line-del">// sequenceStateSub?.cancel() — MISSING</span></pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+  StreamSubscription? sequenceStateSub;</span>
+...
+<span class="line-add">+  sequenceStateSub = player.sequenceStateStream.listen((state) {</span>
+     ...
+   });
+...
+<span class="line-add">+  sequenceStateSub?.cancel();</span></pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Run with Flutter debug mode. Navigate to/from Music tab repeatedly. Confirm no "setState called after dispose" warnings in console.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-05 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-05</span>
+        <span class="bug-title">TextEditingController listeners never removed — anonymous function reference mismatch</span>
+        <span class="badge badge-high">High</span>
+        <span class="badge badge-cat">State / Memory Leak</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          In both <code>recipes.dart</code> and <code>music.dart</code>, a listener is added to a <code>TextEditingController</code>
+          via an anonymous closure in <code>initState</code>. In <code>dispose()</code>, <code>removeListener</code> is called with
+          a <em>new, different</em> anonymous closure. Since <code>removeListener</code> compares function references and the two
+          closures are distinct objects, <strong>the listener is never removed</strong>. Every widget rebuild adds a new listener
+          that is never cleaned up, resulting in memory leaks and potential <code>setState after dispose</code> crashes.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/recipe/recipes.dart : 25–27, 32</span><br/>
+        <span class="file-ref">lib/features/music/music.dart : 41–43, 80</span>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">25</span>  searchC.addListener(<span class="line-del">() { setState(() {}); }</span>);  // closure A
+...
+<span class="line-num">32</span>  searchC.removeListener(<span class="line-del">() {}</span>);  // closure B — different reference, does nothing</pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+  void _onSearchChanged() =&gt; setState(() {});</span>
+
+   @override
+   void initState() {
+     super.initState();
+<span class="line-add">+    searchC.addListener(_onSearchChanged);</span>
+   }
+
+   @override
+   void dispose() {
+<span class="line-add">+    searchC.removeListener(_onSearchChanged);</span>
+     searchC.dispose();
+     ...</pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Navigate between recipe/music tabs repeatedly. Confirm no accumulating setState calls in debug overlay.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-06 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-06</span>
+        <span class="bug-title">Recipe back button navigates to Home (idx:0) instead of Recipe List (idx:1)</span>
+        <span class="badge badge-high">High</span>
+        <span class="badge badge-cat">Navigation / UI</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          The Recipe Detail screen (<code>recipe.dart</code>) has a back button (arrow icon) that calls
+          <code>Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 0})</code>.
+          This navigates the user back to the <strong>Home tab</strong> (index 0) instead of the Recipe List tab (index 1).
+          This breaks the expected navigation flow.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/recipe/recipe.dart : 94–98</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>Open the app, go to Recipe tab</li>
+          <li>Tap any recipe card to open the detail view</li>
+          <li>Tap the back arrow (top-left)</li>
+        </ol>
+
+        <div class="bug-section-label">Observed Result</div>
+        <p>User is taken to the Home tab, losing their position in the recipe list.</p>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>User returns to the Recipe List tab (index 1).</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">94</span>  onTap: () =&gt; Get.offAllNamed(
+<span class="line-num">95</span>    MyRoutes.shellRoute,
+<span class="line-num">96</span><span class="line-del">-   arguments: {'idx': 0},  // Wrong: should be idx: 1</span>
+<span class="line-num">97</span>  ),</pre>
+        <p>Also the same wrong index in the <code>onPopInvokedWithResult</code> callback on line 37.</p>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+ arguments: {'idx': 1},  // Return to Recipe List</span></pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Open a recipe detail, tap back arrow. Confirm Recipe List tab is now active.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-07 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-07</span>
+        <span class="bug-title">CalorieCalculator crashes on non-numeric input — no parse error handling</span>
+        <span class="badge badge-high">High</span>
+        <span class="badge badge-cat">Crash / Input Validation</span>
+        <span class="badge badge-repro">Always (with invalid input)</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          The Calculate button in <code>calorie_calculator.dart</code> calls <code>int.parse(ageC.text)</code>,
+          <code>double.parse(heightC.text)</code>, and <code>double.parse(weightC.text)</code> without any try-catch
+          or format validation. The only guard is a non-empty check, which allows strings like <code>"abc"</code>,
+          <code>"12.5"</code> for age (which <code>int.parse</code> rejects), <code>"-70"</code>, or <code>"1e5"</code>
+          to cause unhandled <code>FormatException</code> crashes.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/calorie_calculator/calorie_calculator.dart : 338–343</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>Navigate to the Calorie Calculator tab</li>
+          <li>Enter <code>"abc"</code> in the Age field (or any non-numeric value)</li>
+          <li>Enter valid numbers in Height and Weight</li>
+          <li>Tap "Calculate"</li>
+        </ol>
+
+        <div class="bug-section-label">Observed Result</div>
+        <p>Unhandled <code>FormatException: Invalid radix-10 number</code> crash.</p>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>Validation error shown to user; no crash.</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">340</span><span class="line-del">- age: int.parse(ageC.text),         // throws FormatException on "abc"</span>
+<span class="line-num">341</span><span class="line-del">- height: double.parse(heightC.text), // throws on non-numeric</span>
+<span class="line-num">342</span><span class="line-del">- weight: double.parse(weightC.text), // throws on non-numeric</span></pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+ final age = int.tryParse(ageC.text);</span>
+<span class="line-add">+ final height = double.tryParse(heightC.text);</span>
+<span class="line-add">+ final weight = double.tryParse(weightC.text);</span>
+<span class="line-add">+ if (age == null || height == null || weight == null) {</span>
+<span class="line-add">+   errorSnackbar(msg: 'Please enter valid numeric values');</span>
+<span class="line-add">+   return;</span>
+<span class="line-add">+ }</span></pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Enter <code>"abc"</code> in Age. Tap Calculate. Confirm error snackbar shown, no crash.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-08 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-08</span>
+        <span class="bug-title">Home screen quote changes on every Obx rebuild — Random created inside build</span>
+        <span class="badge badge-medium">Medium</span>
+        <span class="badge badge-cat">UI / State</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          In <code>home.dart</code>, the daily motivation quote is selected using <code>Random().nextInt(quotes.length)</code>
+          inside the <code>Obx</code> callback. Every time any observable value changes (e.g., <code>isLoading</code> toggles,
+          or any other reactive state change triggers a rebuild), a new random quote is selected.
+          This means the quote flickers and changes unpredictably during any UI refresh.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/home/home.dart : 34–36</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>Open the Home screen</li>
+          <li>Any reactive state change (e.g., navigating away and back, triggering a data reload) rebuilds the Obx</li>
+          <li>Observe: the motivational quote changes unexpectedly</li>
+        </ol>
+
+        <div class="bug-section-label">Observed Result</div>
+        <p>The daily quote changes on every widget rebuild, not just once at startup.</p>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>The daily quote is selected once per session (or once per app launch) and remains stable.</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">34</span><span class="line-del">- final random = Random();  // created fresh every rebuild</span>
+<span class="line-num">35</span>  final randomQuote = quotes.isNotEmpty
+<span class="line-del">-     ? quotes[random.nextInt(quotes.length)]  // different each rebuild</span>
+       : null;</pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <p>Store the selected quote index once in <code>HomeController</code> after data loads, or compute it once in <code>initState</code> of the Home widget and store it as a field. Do not create Random inside the build callback.</p>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Return to Home tab several times or trigger a data reload. Confirm the displayed quote remains the same quote.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-09 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-09</span>
+        <span class="bug-title">Exercise screen — muscle badge condition is always true (OR instead of AND)</span>
+        <span class="badge badge-medium">Medium</span>
+        <span class="badge badge-cat">Logic / UI</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          In <code>exercise.dart</code> line 565, the condition <code>if (e.muscle != null || e.muscle != '')</code>
+          uses <code>||</code> (OR), making the condition always evaluate to <code>true</code>.
+          If <code>e.muscle == null</code>, then <code>e.muscle != null</code> is <code>false</code> but
+          <code>e.muscle != ''</code> is <code>true</code> (null ≠ empty string).
+          If <code>e.muscle == ''</code>, then <code>e.muscle != null</code> is <code>true</code>.
+          No value of <code>e.muscle</code> can make the overall condition false. The muscle badge is
+          always shown, even when the muscle field is null or empty.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/exercise/exercise.dart : 565</span>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">565</span><span class="line-del">- if (e.muscle != null || e.muscle != '')</span>
+<span class="line-num">   </span>  // This is a tautology — always true</pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+ if (e.muscle != null &amp;&amp; e.muscle!.isNotEmpty)</span></pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Load an exercise with a null or empty muscle field. Confirm the muscle badge is hidden.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-10 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-10</span>
+        <span class="bug-title">RecipeService.getRecipeData throws StateError when recipe ID is not found</span>
+        <span class="badge badge-medium">Medium</span>
+        <span class="badge badge-cat">API / Logic</span>
+        <span class="badge badge-repro">Edge Case</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          <code>RecipeService.getRecipeData()</code> calls <code>data.firstWhere((r) =&gt; r.id == id)</code>.
+          If the requested ID does not exist in the JSON (e.g., due to a data inconsistency, or passing <code>id: 0</code>
+          from a null recipe id), <code>firstWhere</code> throws <code>StateError: No element</code>.
+          The controller catches this but rethrows it — the <code>recipe.value</code> stays at its previous
+          (stale or empty-initialized) state and the UI shows wrong data with no user-visible error.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/recipe/service/service.dart : 31</span><br/>
+        <span class="file-ref">lib/features/widgets/custom_card.dart : 14</span>
+
+        <div class="bug-section-label">Reproduction Steps</div>
+        <ol>
+          <li>A recipe card is tapped whose <code>id</code> field is null (<code>recipe.id ?? 0</code> passes 0)</li>
+          <li><code>getRecipeData(id: 0)</code> is called</li>
+          <li><code>firstWhere</code> throws <code>StateError</code></li>
+          <li>Recipe detail shows empty/stale data silently</li>
+        </ol>
+
+        <div class="bug-section-label">Expected Result</div>
+        <p>A clear user-facing error or graceful fallback when the recipe is not found.</p>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">31</span><span class="line-del">- return data.firstWhere((r) =&gt; r.id == id);  // throws StateError if not found</span></pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+ final found = data.firstWhereOrNull((r) =&gt; r.id == id);  // from collection pkg</span>
+<span class="line-add">+ if (found == null) throw Exception('Recipe $id not found');</span>
+<span class="line-add">+ return found;</span></pre>
+          <p>Or use a try-catch with a user-visible error snackbar in the controller.</p>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Trigger navigation to a recipe with id=0. Confirm an error is shown rather than stale content.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-11 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-11</span>
+        <span class="bug-title">artUriFromAsset returns invalid URI for empty assetPath</span>
+        <span class="badge badge-medium">Medium</span>
+        <span class="badge badge-cat">Logic / Audio</span>
+        <span class="badge badge-repro">Edge Case</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          In <code>music.dart</code>, the method <code>artUriFromAsset</code> has an early return when
+          <code>assetPath.isEmpty</code>. It returns <code>Uri.parse('asset:///$assetPath')</code>,
+          which evaluates to <code>Uri.parse('asset:///')</code> — an effectively invalid URI.
+          This is then passed as <code>artUri</code> to the <code>MediaItem</code>, and forwarded to
+          the <code>just_audio_background</code> notification. This can cause artwork loading failures
+          in the lock screen / notification, and potentially trigger exceptions in the media session handler.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/music/music.dart : 244–246</span>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">244</span>  Future&lt;Uri&gt; artUriFromAsset(String assetPath) async {
+<span class="line-num">245</span><span class="line-del">-   if (assetPath.isEmpty) return Uri.parse('asset:///$assetPath');</span>
+<span class="line-num">   </span>  // When assetPath == '', returns Uri.parse('asset:///') — invalid</pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+   if (assetPath.isEmpty) return Uri.parse('asset:///assets/audio-thumb/default.png');</span>
+   // Or return null and handle in the caller</pre>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-label">Verification</div>
+          <p>Play a song with a null or empty <code>thumb</code> field. Confirm the notification does not crash and shows a placeholder image.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-12 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-12</span>
+        <span class="bug-title">CheckAllFields does not check mealsC — Calculate button incorrectly enabled</span>
+        <span class="badge badge-medium">Medium</span>
+        <span class="badge badge-cat">Logic / UI</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          The <code>checkAllFields()</code> method in <code>calorie_calculator.dart</code> only checks
+          <code>ageC</code>, <code>heightC</code>, and <code>weightC</code> to enable the Calculate button.
+          The <code>mealsC</code> (Number of Meals) field is ignored. The per-meal breakdown section only
+          renders when <code>mealsC</code> has a value <code>&gt; 1</code>, but the suggestion algorithm
+          uses it for matching. An empty <code>mealsC</code> silently defaults to 1, which is consistent,
+          but the visual state indicator is misleading: all four fields appear equal in the form but only
+          three gate the "Calculate" button highlight.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/calorie_calculator/calorie_calculator.dart : 63–74</span>
+
+        <div class="bug-section-label">Root Cause</div>
+        <pre><span class="line-num">64</span>  final allFilled =
+<span class="line-num">65</span>      ageC.text.isNotEmpty &amp;&amp;
+<span class="line-num">66</span>      heightC.text.isNotEmpty &amp;&amp;
+<span class="line-num">67</span><span class="line-del">-     weightC.text.isNotEmpty;  // mealsC is not checked</span></pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <pre><span class="line-add">+     weightC.text.isNotEmpty;</span>
+<span class="line-add">+     // Note: mealsC defaults to 1 if empty, which is intentional</span>
+<span class="line-add">+     // If meals is required, add: &amp;&amp; mealsC.text.isNotEmpty</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-13 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-13</span>
+        <span class="bug-title">Profile — "Delete Account" and "Log Out" have empty no-op callbacks</span>
+        <span class="badge badge-low">Low</span>
+        <span class="badge badge-cat">Logic / Incomplete Feature</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          Both "Delete Account" (line 90) and "Log Out" (line 92) in <code>profile.dart</code> have
+          <code>onPressed: () {}</code> — empty callbacks. Tapping these buttons silently does nothing.
+          There is no confirmation dialog, no feedback, and no action. Users may believe the action succeeded.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">lib/features/profile/profile.dart : 90, 92</span>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <p>Show a confirmation dialog or an error snackbar indicating the feature is not yet implemented, rather than silently doing nothing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-14 -->
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-id">BUG-14</span>
+        <span class="bug-title">Widget test is the default Flutter counter template — always fails</span>
+        <span class="badge badge-low">Low</span>
+        <span class="badge badge-cat">Test Failure</span>
+        <span class="badge badge-repro">Always</span>
+      </div>
+      <div class="bug-body">
+
+        <div class="bug-section-label">Description</div>
+        <p>
+          The only automated test in <code>test/widget_test.dart</code> is the Flutter default counter app
+          smoke test (tests for a widget with text "0" and a <code>+</code> icon). This test was never updated
+          for the FitandFuel app. It always fails because neither a text "0" widget nor an add icon exists
+          in this app. This gives a false-negative on every CI run.
+        </p>
+
+        <div class="bug-section-label">File References</div>
+        <span class="file-ref">test/widget_test.dart : 1–30</span>
+
+        <div class="bug-section-label">Test Failure Output</div>
+        <pre>Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:&lt;Found 0 widgets with text "0": []&gt;
+00:02 +0 -1: Counter increments smoke test [FAILED]</pre>
+
+        <div class="fix-box">
+          <div class="fix-label">Suggested Fix</div>
+          <p>Replace the entire test with meaningful widget or integration tests for the actual FitandFuel screens. At minimum, delete the counter smoke test.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /bug list -->
+
+
+  <!-- ===== BUGS BY MODULE ===== -->
+  <div class="section" id="modules">
+    <div class="section-title"><span class="icon">📦</span>Bugs by Module</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>File</th>
+          <th>Bug IDs</th>
+          <th>Severity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Recipe Detail</strong></td>
+          <td><code>lib/features/recipe/recipe.dart</code></td>
+          <td>BUG-01, BUG-06, BUG-10</td>
+          <td><span class="badge badge-critical">Critical</span> <span class="badge badge-high">High</span> <span class="badge badge-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Exercise</strong></td>
+          <td><code>lib/features/exercise/exercise.dart</code></td>
+          <td>BUG-02, BUG-09</td>
+          <td><span class="badge badge-critical">Critical</span> <span class="badge badge-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Navigation / Routes</strong></td>
+          <td><code>lib/routes/routes.dart</code>, <code>profile.dart</code></td>
+          <td>BUG-03</td>
+          <td><span class="badge badge-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Music</strong></td>
+          <td><code>lib/features/music/music.dart</code></td>
+          <td>BUG-04, BUG-05, BUG-11</td>
+          <td><span class="badge badge-high">High</span> <span class="badge badge-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Recipe List</strong></td>
+          <td><code>lib/features/recipe/recipes.dart</code></td>
+          <td>BUG-05</td>
+          <td><span class="badge badge-high">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>Calorie Calculator</strong></td>
+          <td><code>lib/features/calorie_calculator/calorie_calculator.dart</code></td>
+          <td>BUG-07, BUG-12</td>
+          <td><span class="badge badge-high">High</span> <span class="badge badge-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Home</strong></td>
+          <td><code>lib/features/home/home.dart</code></td>
+          <td>BUG-08</td>
+          <td><span class="badge badge-medium">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Profile</strong></td>
+          <td><code>lib/features/profile/profile.dart</code></td>
+          <td>BUG-13</td>
+          <td><span class="badge badge-low">Low</span></td>
+        </tr>
+        <tr>
+          <td><strong>Tests</strong></td>
+          <td><code>test/widget_test.dart</code></td>
+          <td>BUG-14</td>
+          <td><span class="badge badge-low">Low</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== CRASH RISKS ===== -->
+  <div class="section" id="crash-risks">
+    <div class="section-title"><span class="icon">💥</span>Crash Risks</div>
+    <p style="color:var(--muted); margin-bottom: 16px; font-size:0.9rem;">Confirmed crash paths with strong evidence — these do not require edge conditions to trigger.</p>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>Risk</th><th>Location</th><th>Trigger</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Null force-unwrap on <code>ingredients</code>, <code>steps</code>, <code>tips</code></td>
+          <td><code>recipe.dart:243,307,408</code></td>
+          <td>Any recipe with a null list field</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Null force-unwrap on <code>e.muscle</code> in filter</td>
+          <td><code>exercise.dart:60</code></td>
+          <td>Any exercise with null muscle field + active muscle filter</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>int.parse()</code> / <code>double.parse()</code> FormatException</td>
+          <td><code>calorie_calculator.dart:338-343</code></td>
+          <td>User enters non-numeric characters in age/height/weight fields</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Navigation to unregistered route <code>/EditProfile</code></td>
+          <td><code>profile.dart:86</code></td>
+          <td>Tapping "Edit Profile" button</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>int.parse('0xFF${exercise.bgColor}')</code> crash if <code>bgColor</code> is null or malformed</td>
+          <td><code>home.dart:183</code></td>
+          <td>A home exercise with a null or non-hex <code>bgColor</code> field</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><code>int.parse('0xFF$color')</code> crash if playlist color field is null or malformed</td>
+          <td><code>music.dart:535</code></td>
+          <td>A playlist with a null or non-hex <code>color</code> field</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== EDGE CASE FAILURES ===== -->
+  <div class="section" id="edge-cases">
+    <div class="section-title"><span class="icon">⚠️</span>Edge Case Failures</div>
+
+    <table>
+      <thead>
+        <tr><th>Scenario</th><th>Affected Area</th><th>Failure</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Recipe with null ingredients / steps / tips</td>
+          <td>Recipe Detail screen</td>
+          <td>App crashes (BUG-01)</td>
+        </tr>
+        <tr>
+          <td>Exercise with null muscle field + muscle filter active</td>
+          <td>Exercise screen</td>
+          <td>App crashes (BUG-02)</td>
+        </tr>
+        <tr>
+          <td>User enters alphabetic text in Age / Height / Weight</td>
+          <td>Calorie Calculator</td>
+          <td>Unhandled FormatException crash (BUG-07)</td>
+        </tr>
+        <tr>
+          <td>Recipe card with <code>id == null</code></td>
+          <td>Recipe Detail (via card)</td>
+          <td>Navigates to id=0; service throws StateError (BUG-10)</td>
+        </tr>
+        <tr>
+          <td>Song with empty <code>thumb</code> path</td>
+          <td>Music player notification</td>
+          <td>Invalid artwork URI passed to media session (BUG-11)</td>
+        </tr>
+        <tr>
+          <td>Playlist or home exercise with malformed hex color string</td>
+          <td>Home / Music screens</td>
+          <td>FormatException crash on <code>int.parse('0xFF...')</code></td>
+        </tr>
+        <tr>
+          <td>Rapid tab switching (Home → Music → Home) multiple times</td>
+          <td>Music, Recipe screens</td>
+          <td>Stream / TextEditingController listener accumulation (BUG-04, BUG-05)</td>
+        </tr>
+        <tr>
+          <td>Tapping "Edit Profile" on Profile screen</td>
+          <td>Navigation</td>
+          <td>GetX exception: No registered route for /EditProfile (BUG-03)</td>
+        </tr>
+        <tr>
+          <td>Entering 0 or 1 as number of meals before calculating</td>
+          <td>Calorie Calculator</td>
+          <td>Per-meal section not shown, but suggest recipes still uses mealsC value silently</td>
+        </tr>
+        <tr>
+          <td>Playlist with empty <code>songIds</code> list</td>
+          <td>Music screen</td>
+          <td>Handled gracefully: logged, returns early</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== STATIC ERRORS ===== -->
+  <div class="section" id="static">
+    <div class="section-title"><span class="icon">🔬</span>Static Code Errors</div>
+
+    <p style="color:var(--muted); margin-bottom:12px; font-size:0.9rem;">
+      <strong>flutter analyze</strong> reported <strong>0 issues</strong>.
+      However, the following patterns were identified during manual inspection that the analyzer does not flag
+      (they are valid Dart syntax) but represent runtime crash risks:
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>File : Line</th><th>Risk</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>recipe.ingredients != null || recipe.ingredients!.isNotEmpty</code></td>
+          <td><code>recipe.dart:243</code></td>
+          <td>Null crash when ingredients is null (BUG-01)</td>
+        </tr>
+        <tr>
+          <td><code>recipe.steps != null || recipe.steps!.isNotEmpty</code></td>
+          <td><code>recipe.dart:307</code></td>
+          <td>Null crash when steps is null (BUG-01)</td>
+        </tr>
+        <tr>
+          <td><code>recipe.tips != null || recipe.tips!.isNotEmpty</code></td>
+          <td><code>recipe.dart:408</code></td>
+          <td>Null crash when tips is null (BUG-01)</td>
+        </tr>
+        <tr>
+          <td><code>e.muscle!.contains(selectedMuscle)</code></td>
+          <td><code>exercise.dart:60</code></td>
+          <td>Null crash on nullable muscle field (BUG-02)</td>
+        </tr>
+        <tr>
+          <td><code>if (e.muscle != null || e.muscle != '')</code></td>
+          <td><code>exercise.dart:565</code></td>
+          <td>Tautology — always true (BUG-09)</td>
+        </tr>
+        <tr>
+          <td><code>int.parse('0xFF${exercise.bgColor}')</code></td>
+          <td><code>home.dart:183</code></td>
+          <td>FormatException if bgColor is null/malformed</td>
+        </tr>
+        <tr>
+          <td><code>int.parse('0xFF$color')</code></td>
+          <td><code>music.dart:535</code></td>
+          <td>FormatException if playlist color is null/malformed</td>
+        </tr>
+        <tr>
+          <td><code>int.parse(ageC.text)</code></td>
+          <td><code>calorie_calculator.dart:341</code></td>
+          <td>FormatException on non-integer input (BUG-07)</td>
+        </tr>
+        <tr>
+          <td><code>searchC.removeListener(() {})</code></td>
+          <td><code>recipes.dart:32, music.dart:80</code></td>
+          <td>Listener never removed — memory leak (BUG-05)</td>
+        </tr>
+        <tr>
+          <td><code>player.sequenceStateStream.listen(...)</code> — return discarded</td>
+          <td><code>music.dart:62</code></td>
+          <td>Stream subscription leaked (BUG-04)</td>
+        </tr>
+        <tr>
+          <td><code>print()</code> calls in production code</td>
+          <td><code>profile.dart:161,165,168</code></td>
+          <td>Debug output leaking to release builds</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== TEST FAILURES ===== -->
+  <div class="section" id="tests">
+    <div class="section-title"><span class="icon">❌</span>Test Failures</div>
+
+    <div class="bug-card">
+      <div class="bug-header">
+        <span class="bug-title">Counter increments smoke test</span>
+        <span class="badge badge-high">Test Failure</span>
+      </div>
+      <div class="bug-body">
+        <div class="bug-section-label">File</div>
+        <span class="file-ref">test/widget_test.dart : 14–29</span>
+
+        <div class="bug-section-label">Failure Output</div>
+        <pre>Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:&lt;Found 0 widgets with text "0": []&gt;
+00:02 +0 -1: Counter increments smoke test [FAILED]</pre>
+
+        <div class="bug-section-label">Root Cause</div>
+        <p>This is the unmodified Flutter starter template test. It expects the default counter demo app
+          widget tree (a Text widget showing "0" and an add FloatingActionButton). The FitandFuel app
+          has no such widgets. The test was never updated after project scaffolding.</p>
+
+        <div class="bug-section-label">Impact</div>
+        <p>Every CI pipeline run will report a test failure, masking any real test regressions. The test
+          provides zero value and gives false confidence when passing in a counter-demo context.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FIX SUMMARY ===== -->
+  <div class="section" id="fixes">
+    <div class="section-title"><span class="icon">🛠️</span>High-Confidence Fix Summary (Priority Order)</div>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>Bug</th><th>Fix</th><th>Effort</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>BUG-01 — Null crash in Recipe Detail (||  →  &amp;&amp;)</td>
+          <td>Change 3 <code>||</code> to <code>&amp;&amp;</code> in <code>recipe.dart</code></td>
+          <td>1 min</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>BUG-02 — Null crash in Exercise filter (<code>e.muscle!</code>)</td>
+          <td>Replace <code>e.muscle!.contains()</code> with <code>e.muscle?.contains() ?? false</code></td>
+          <td>1 min</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>BUG-03 — Edit Profile navigation crash</td>
+          <td>Uncomment or disable the EditProfile route</td>
+          <td>5 min</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>BUG-07 — CalorieCalculator FormatException</td>
+          <td>Replace <code>int.parse</code>/<code>double.parse</code> with <code>tryParse</code> + validation</td>
+          <td>10 min</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>BUG-04 — sequenceStateStream leaked</td>
+          <td>Store subscription in a variable and cancel in <code>dispose()</code></td>
+          <td>2 min</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>BUG-05 — searchC listener never removed</td>
+          <td>Extract named listener method and use same reference in add/remove</td>
+          <td>5 min</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>BUG-06 — Recipe back button wrong index</td>
+          <td>Change <code>{'idx': 0}</code> to <code>{'idx': 1}</code> in recipe.dart back nav</td>
+          <td>1 min</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>BUG-08 — Quote changes on every rebuild</td>
+          <td>Select random quote once in controller after data loads; store as field</td>
+          <td>10 min</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>BUG-09 — Exercise muscle badge tautology</td>
+          <td>Change <code>||</code> to <code>&amp;&amp;</code> in badge condition</td>
+          <td>1 min</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>BUG-14 — Widget test failures</td>
+          <td>Delete or replace the counter template test with real app tests</td>
+          <td>15 min</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== APPENDIX ===== -->
+  <div class="section" id="appendix">
+    <div class="section-title"><span class="icon">📎</span>Appendix</div>
+
+    <div class="two-col">
+      <div class="method-card">
+        <h4>Not Fully Testable</h4>
+        <ul>
+          <li><strong>Runtime audio playback</strong> — just_audio / just_audio_background behavior on real device could not be verified without an emulator/device. Code path analysis was used.</li>
+          <li><strong>Video thumbnail generation</strong> — video_thumbnail native plugin requires platform execution; could not verify runtime behavior of <code>VideoThumbnail.thumbnailData()</code>.</li>
+          <li><strong>Background media service</strong> — AudioService behavior in background/foreground switch requires runtime testing on Android.</li>
+          <li><strong>Push notifications toggle</strong> — the notification checkbox in Profile stores state in memory only; actual notification permission request is not implemented (<code>utlis/notification.dart</code> is unused).</li>
+        </ul>
+      </div>
+      <div class="method-card">
+        <h4>Observations (Not Bugs)</h4>
+        <ul>
+          <li>All JSON data is loaded from local assets — no network calls exist; offline behavior is not a concern for current features.</li>
+          <li><code>flutter analyze</code> reported 0 issues — the Dart type system is satisfied by the code as written (null assertion operators are syntactically valid).</li>
+          <li>The MainShell caches pages in a list of size 5 while only 4 tabs exist — harmless but wasteful allocation.</li>
+          <li>Username is hardcoded as "Lucifer" in <code>profile.dart</code> — no user authentication is implemented; this is by design.</li>
+          <li>Several routes are defined (Login, Signup, AccountLink) but commented out — this is expected for an in-development app.</li>
+          <li><code>HomeController</code> has an unused <code>Timer? timer</code> field and <code>bool snackbarShown</code> — dead code but not a bug.</li>
+          <li>Calorie formula uses a fixed activity factor of 1.2 (sedentary) — this is a design choice, not a bug.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <span>FitandFuel Bug Audit Report · Generated 2026-03-24</span>
+  <span>Flutter 3.29.0 · Dart 3.7.0 · 14 bugs found · 2 Critical · 5 High · 5 Medium · 2 Low</span>
+</div>
+
+</body>
+</html>

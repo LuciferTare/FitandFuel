@@ -1,0 +1,599 @@
+﻿[
+  {
+    "id": 1,
+    "title": "Aarambh Hai Prachand",
+    "artist": "Piyush Mishra",
+    "thumb": "assets/audio-thumb/aarambh_hai_prachand.jpg",
+    "asset": "assets/audio-opus/Aarambh Hai Prachand.opus"
+  },
+  {
+    "id": 2,
+    "title": "Aathma Raama",
+    "artist": "Brodha V",
+    "thumb": "assets/audio-thumb/aathma_raama.jpg",
+    "asset": "assets/audio-opus/Aathma Raama.opus"
+  },
+  {
+    "id": 3,
+    "title": "Ashtami",
+    "artist": "Adarsh Shinde",
+    "thumb": "assets/audio-thumb/ashtami.jpg",
+    "asset": "assets/audio-opus/Ashtami.opus"
+  },
+  {
+    "id": 4,
+    "title": "Babam Bam",
+    "artist": "Paradox",
+    "thumb": "assets/audio-thumb/babam_bam_paradox.jpg",
+    "asset": "assets/audio-opus/Babam Bam - Paradox.opus"
+  },
+  {
+    "id": 5,
+    "title": "Babam Bam",
+    "artist": "Kailash Kher",
+    "thumb": "assets/audio-thumb/babam_bam.jpg",
+    "asset": "assets/audio-opus/Babam Bam.opus"
+  },
+  {
+    "id": 6,
+    "title": "Bam Lehri",
+    "artist": "Rhymster",
+    "thumb": "assets/audio-thumb/bam_lehri.jpg",
+    "asset": "assets/audio-opus/Bam Lehri.opus"
+  },
+  {
+    "id": 7,
+    "title": "Bappa",
+    "artist": "Vishal Dadlani",
+    "thumb": "assets/audio-thumb/bappa.jpg",
+    "asset": "assets/audio-opus/Bappa.opus"
+  },
+  {
+    "id": 8,
+    "title": "Deva Shree Ganesha",
+    "artist": "Ajay Gogavale",
+    "thumb": "assets/audio-thumb/deva_shree_ganesha.jpg",
+    "asset": "assets/audio-opus/Deva Shree Ganesha.opus"
+  },
+  {
+    "id": 9,
+    "title": "Gajanana",
+    "artist": "Sukhwinder Singh",
+    "thumb": "assets/audio-thumb/gajanana.jpg",
+    "asset": "assets/audio-opus/Gajanana.opus"
+  },
+  {
+    "id": 10,
+    "title": "Hey Ganaraya",
+    "artist": "Divya Kumar",
+    "thumb": "assets/audio-thumb/hey_ganaraya.jpg",
+    "asset": "assets/audio-opus/Hey Ganaraya.opus"
+  },
+  {
+    "id": 11,
+    "title": "Humare Sath Shri Raghunath",
+    "artist": "Unknown",
+    "thumb": "assets/audio-thumb/humare_sath_shri_raghunath.jpg",
+    "asset": "assets/audio-opus/Humare Sath Shri Raghunath.opus"
+  },
+  {
+    "id": 12,
+    "title": "Jai Bhavani Jai Shivaji",
+    "artist": "Ajay-Atul",
+    "thumb": "assets/audio-thumb/jai_bhavani_jai_shivaji.jpg",
+    "asset": "assets/audio-opus/Jai Bhavani Jai Shivaji.opus"
+  },
+  {
+    "id": 13,
+    "title": "Jaikal Mahakal",
+    "artist": "Amit Trivedi, Suhas Sawant",
+    "thumb": "assets/audio-thumb/jaikal_mahakal.jpg",
+    "asset": "assets/audio-opus/Jaikal Mahakal.opus"
+  },
+  {
+    "id": 14,
+    "title": "Kalabhairava Ashtakam",
+    "artist": "Shankar Mahadevan",
+    "thumb": "assets/audio-thumb/kalabhairava_ashtakam.jpg",
+    "asset": "assets/audio-opus/Kalabhairava Ashtakam.opus"
+  },
+  {
+    "id": 15,
+    "title": "Krishna ki chetavani",
+    "artist": "Agam Aggarwal",
+    "thumb": "assets/audio-thumb/krishna_ki_chetavani.jpg",
+    "asset": "assets/audio-opus/Krishna ki chetavani.opus"
+  },
+  {
+    "id": 16,
+    "title": "Krishna Trance",
+    "artist": "Kaala Bhairava",
+    "thumb": "assets/audio-thumb/krishna_trance.jpg",
+    "asset": "assets/audio-opus/Krishna Trance.opus"
+  },
+  {
+    "id": 17,
+    "title": "Maay Bhavani",
+    "artist": "Sukhwinder Singh, Shreya Ghoshal",
+    "thumb": "assets/audio-thumb/maay_bhavani.jpg",
+    "asset": "assets/audio-opus/Maay Bhavani.opus"
+  },
+  {
+    "id": 18,
+    "title": "Mann Mein Shiva",
+    "artist": "Kunal Ganjawala, Deepanshi Nagar, Padmanabh Gaikwad",
+    "thumb": "assets/audio-thumb/mann_mein_shiva.jpg",
+    "asset": "assets/audio-opus/Mann Mein Shiva.opus"
+  },
+  {
+    "id": 19,
+    "title": "Mauli Mauli",
+    "artist": "Ajay Gogavale",
+    "thumb": "assets/audio-thumb/mauli_mauli.jpg",
+    "asset": "assets/audio-opus/Mauli Mauli.opus"
+  },
+  {
+    "id": 20,
+    "title": "Morya Morya",
+    "artist": "Ajay-Atul",
+    "thumb": "assets/audio-thumb/morya_morya.jpg",
+    "asset": "assets/audio-opus/Morya Morya.opus"
+  },
+  {
+    "id": 21,
+    "title": "Ram Darshan",
+    "artist": "Narci",
+    "thumb": "assets/audio-thumb/ram_darshan.jpg",
+    "asset": "assets/audio-opus/Ram Darshan.opus"
+  },
+  {
+    "id": 22,
+    "title": "Ram Mere Sage",
+    "artist": "Narci",
+    "thumb": "assets/audio-thumb/ram_mere_sage.jpg",
+    "asset": "assets/audio-opus/Ram Mere Sage.opus"
+  },
+  {
+    "id": 23,
+    "title": "Ram Tera Aasra",
+    "artist": "Narci",
+    "thumb": "assets/audio-thumb/ram_tera_aasra.jpg",
+    "asset": "assets/audio-opus/Ram Tera Aasra.opus"
+  },
+  {
+    "id": 24,
+    "title": "Sadda Dil Vi Tu",
+    "artist": "Sachin-Jigar, Hard Kaur,  Mayur Puri",
+    "thumb": "assets/audio-thumb/abcd.jpg",
+    "asset": "assets/audio-opus/Sadda Dil Vi Tu.opus"
+  },
+  {
+    "id": 25,
+    "title": "Shambhu Sutaya",
+    "artist": "Shankar Mahadevan, Vishal Dadlani",
+    "thumb": "assets/audio-thumb/shambhu_sutaya.jpg",
+    "asset": "assets/audio-opus/abcd Sutaya.opus"
+  },
+  {
+    "id": 26,
+    "title": "Shankar Shiv Bhole Umapati Mahadev",
+    "artist": "Mavelle, Hitesh Shekhawat",
+    "thumb": "assets/audio-thumb/shankar_shiv_bhole_umapati_mahadev.jpg",
+    "asset": "assets/audio-opus/Shankar Shiv Bhole Umapati Mahadev.opus"
+  },
+  {
+    "id": 27,
+    "title": "Shankara Re Shankara",
+    "artist": "Mehul Vyas, Adarsh Shinde",
+    "thumb": "assets/audio-thumb/shankara_re_shankara.jpg",
+    "asset": "assets/audio-opus/Shankara Re Shankara.opus"
+  },
+  {
+    "id": 28,
+    "title": "Shendur Laal Chadhayo",
+    "artist": "Ravindra Sathe",
+    "thumb": "assets/audio-thumb/shendur_laal_chadhayo.jpg",
+    "asset": "assets/audio-opus/Shendur Laal Chadhayo.opus"
+  },
+  {
+    "id": 29,
+    "title": "Shiv Tandav Stotram",
+    "artist": "Ashutosh Rana",
+    "thumb": "assets/audio-thumb/shiv_tandav_stotram.jpg",
+    "asset": "assets/audio-opus/Shiv Tandav Stotram.opus"
+  },
+  {
+    "id": 30,
+    "title": "Shiv Tandav Stotram",
+    "artist": "Armonian",
+    "thumb": "assets/audio-thumb/shiv_tandav_stotram_armonian.jpg",
+    "asset": "assets/audio-opus/Shiv Tandav Stotram - Armonian.opus"
+  },
+  {
+    "id": 31,
+    "title": "Shiv Tandav Stotram(Har Har Shiv Shankar)",
+    "artist": "Sachet Tandon, Parampara Tandon",
+    "thumb": "assets/audio-thumb/shiv_tandav_stotram_har_har_shiv_shankar.jpg",
+    "asset": "assets/audio-opus/Shiv Tandav Stotram(Har Har Shiv Shankar).opus"
+  },
+  {
+    "id": 32,
+    "title": "Sukhharta Dukhharta",
+    "artist": "Amitabh Bachchan",
+    "thumb": "assets/audio-thumb/sukhharta_dukhharta.jpg",
+    "asset": "assets/audio-opus/Sukhharta Dukhharta.opus"
+  },
+  {
+    "id": 33,
+    "title": "Tuch Maajhi Aai Devaa",
+    "artist": "Dnyaneshwar Meshram, Swapnil Bandodkar, Avadhoot Gupte",
+    "thumb": "assets/audio-thumb/tuch_maajhi_aai_devaa.jpg",
+    "asset": "assets/audio-opus/Tuch Maajhi Aai Devaa.opus"
+  },
+
+  {
+    "id": 34,
+    "title": "Maharajachi Kirti Befam (Powada)",
+    "artist": "Nandesh Umap",
+    "thumb": "assets/audio-thumb/me_shivajiraj_bhosale_boltoy.jpg",
+    "asset": "assets/audio-opus/Maharajachi Kirti Befam (Powada).opus"
+  },
+  {
+    "id": 35,
+    "title": "Raja Aala",
+    "artist": "Devdutta Manisha Baji, Avadhoot Gupte",
+    "thumb": "assets/audio-thumb/pawankhind.jpg",
+    "asset": "assets/audio-opus/Raja Aala.opus"
+  },
+  {
+    "id": 36,
+    "title": "Yugat Mandali",
+    "artist": "Devdutta Manisha Baji, Avadhoot Gandhi, Haridas Shinde",
+    "thumb": "assets/audio-thumb/pawankhind.jpg",
+    "asset": "assets/audio-opus/Yugat Mandali.opus"
+  },
+  {
+    "id": 37,
+    "title": "Chakar Shivbacha Honar",
+    "artist": "Padmanabh Gaikwad, Avadhoot Gandhi",
+    "thumb": "assets/audio-thumb/pawankhind.jpg",
+    "asset": "assets/audio-opus/Chakar Shivbacha Honar.opus"
+  },
+  {
+    "id": 38,
+    "title": "O' Raaje",
+    "artist": "Sukhwinder Singh",
+    "thumb": "assets/audio-thumb/me_shivajiraj_bhosale_boltoy.jpg",
+    "asset": "assets/audio-opus/O Raaje.opus"
+  },
+  {
+    "id": 39,
+    "title": "Aale Marathe",
+    "artist": "Devdutta Manisha Baji, Suvarna Rathod",
+    "thumb": "assets/audio-thumb/aale_marathe.jpg",
+    "asset": "assets/audio-opus/Aale Marathe.opus"
+  },
+  {
+    "id": 40,
+    "title": "Maval Jaga Zala Ra",
+    "artist": "Devdutta Manisha Baji, Avadhoot Gandhi",
+    "thumb": "assets/audio-thumb/maval_jaga_zala_ra.jpg",
+    "asset": "assets/audio-opus/Maval Jaga Zala Ra.opus"
+  },
+  {
+    "id": 41,
+    "title": "Shivba Raja",
+    "artist": "Avadhoot Gandhi, Devdutta Manisha Baji",
+    "thumb": "assets/audio-thumb/shivba_raja.jpg",
+    "asset": "assets/audio-opus/Shivba Raja.opus"
+  },
+  {
+    "id": 42,
+    "title": "Shwasat Raja Dhyasat Raja",
+    "artist": "Devdutta Manisha Baji, Avadhoot Gandhi",
+    "thumb": "assets/audio-thumb/pawankhind.jpg",
+    "asset": "assets/audio-opus/Shwasat Raja Dhyasat Raja.opus"
+  },
+  {
+    "id": 43,
+    "title": "Shivaba Malhari",
+    "artist": "Pravin Tarde, Astad Kale, Ajay Purkar, Harish Dud hade, Ankit Mohan",
+    "thumb": "assets/audio-thumb/shivaba_malhari.jpg",
+    "asset": "assets/audio-opus/Shivaba Malhari.opus"
+  },
+  {
+    "id": 44,
+    "title": "Rani Fadakti Lakhon Jhende",
+    "artist": "Ashutosh Mungle, Ajay Purkar",
+    "thumb": "assets/audio-thumb/rani_fadakti_lakhon_jhende.jpg",
+    "asset": "assets/audio-opus/Rani Fadakti Lakhon Jhende.opus"
+  },
+  {
+    "id": 45,
+    "title": "Majhya Raja Ra",
+    "artist": "Adarsh Shinde",
+    "thumb": "assets/audio-thumb/majhya_raja_ra.jpg",
+    "asset": "assets/audio-opus/Majhya Raja Ra.opus"
+  },
+
+  {
+    "id": 46,
+    "title": "On Top",
+    "artist": "Karan Aujla",
+    "thumb": "assets/audio-thumb/on_top.jpg",
+    "asset": "assets/audio-opus/On Top.opus"
+  },
+  {
+    "id": 47,
+    "title": "Khayaal",
+    "artist": "Talwiinder, NDS",
+    "thumb": "assets/audio-thumb/khayaal.jpg",
+    "asset": "assets/audio-opus/Khayaal.opus"
+  },
+  {
+    "id": 48,
+    "title": "Tere Te",
+    "artist": "AP Dhillon, Gurinder Gill",
+    "thumb": "assets/audio-thumb/tere_te.jpg",
+    "asset": "assets/audio-opus/Tere Te.opus"
+  },
+  {
+    "id": 49,
+    "title": "Jee Ni Lagda",
+    "artist": "Karan Aujla, Ikky",
+    "thumb": "assets/audio-thumb/karan_aujla.jpg",
+    "asset": "assets/audio-opus/Jee Ni Lagda.opus"
+  },
+  {
+    "id": 50,
+    "title": "For A Reason",
+    "artist": "Karan Aujla, Ikky",
+    "thumb": "assets/audio-thumb/karan_aujla_1.jpg",
+    "asset": "assets/audio-opus/For A Reason.opus"
+  },
+  {
+    "id": 51,
+    "title": "Excuses",
+    "artist": "AP Dhillon, Gurinder Gill, Intense",
+    "thumb": "assets/audio-thumb/excuses.jpg",
+    "asset": "assets/audio-opus/Excuses.opus"
+  },
+  {
+    "id": 52,
+    "title": "Softly",
+    "artist": "Karan Aujla, Ikky",
+    "thumb": "assets/audio-thumb/karan_aujla.jpg",
+    "asset": "assets/audio-opus/Softly.opus"
+  },
+  {
+    "id": 54,
+    "title": "Admirin You",
+    "artist": "Karan Aujla, Ikky, Preston Pabo",
+    "thumb": "assets/audio-thumb/karan_aujla.jpg",
+    "asset": "assets/audio-opus/Admirin You.opus"
+  },
+  {
+    "id": 55,
+    "title": "Her",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/her.jpg",
+    "asset": "assets/audio-opus/Her.opus"
+  },
+  {
+    "id": 56,
+    "title": "I Really Do",
+    "artist": "Karan Aujla, Ikky",
+    "thumb": "assets/audio-thumb/karan_aujla_1.jpg",
+    "asset": "assets/audio-opus/I Really Do.opus"
+  },
+  {
+    "id": 57,
+    "title": "Brown Munde",
+    "artist": "AP Dhillon, Gminxr, Gurinder Gill, Shinda Kahlon",
+    "thumb": "assets/audio-thumb/brown_munde.jpg",
+    "asset": "assets/audio-opus/Brown Munde.opus"
+  },
+  {
+    "id": 58,
+    "title": "Insane",
+    "artist": "AP Dhillon, Shinda Kahlon, Gurinder Gill, Gminxr",
+    "thumb": "assets/audio-thumb/insane.jpg",
+    "asset": "assets/audio-opus/Insane.opus"
+  },
+  {
+    "id": 59,
+    "title": "No Love",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/no_love.jpg",
+    "asset": "assets/audio-opus/No Love.opus"
+  },
+  {
+    "id": 60,
+    "title": "Lemonade",
+    "artist": "Diljit Dosanjh",
+    "thumb": "assets/audio-thumb/lemonade.jpg",
+    "asset": "assets/audio-opus/Lemonade.opus"
+  },
+  {
+    "id": 61,
+    "title": "Bandana",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/bandana.jpg",
+    "asset": "assets/audio-opus/Bandana.opus"
+  },
+  {
+    "id": 62,
+    "title": "Russian Bandana",
+    "artist": "Dhanda Nyoliwala",
+    "thumb": "assets/audio-thumb/russian_bandana.jpg",
+    "asset": "assets/audio-opus/Russian Bandana.opus"
+  },
+  {
+    "id": 63,
+    "title": "Wavy",
+    "artist": "Karan Aujla, Jay Trak",
+    "thumb": "assets/audio-thumb/wavy.jpg",
+    "asset": "assets/audio-opus/Wavy.opus"
+  },
+  {
+    "id": 64,
+    "title": "Dior",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/shubh.jpg",
+    "asset": "assets/audio-opus/Dior.opus"
+  },
+  {
+    "id": 65,
+    "title": "Droptop",
+    "artist": "AP Dhillon, Gurinder Gill, Gminxr",
+    "thumb": "assets/audio-thumb/droptop.jpg",
+    "asset": "assets/audio-opus/Droptop.opus"
+  },
+  {
+    "id": 66,
+    "title": "Cheques",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/shubh.jpg",
+    "asset": "assets/audio-opus/Cheques.opus"
+  },
+  {
+    "id": 67,
+    "title": "Baller",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/baller.jpg",
+    "asset": "assets/audio-opus/Baller.opus"
+  },
+  {
+    "id": 68,
+    "title": "Born To Shine",
+    "artist": "Diljit Dosanjh",
+    "thumb": "assets/audio-thumb/diljit_dosanjh.jpg",
+    "asset": "assets/audio-opus/Born To Shine.opus"
+  },
+  {
+    "id": 69,
+    "title": "Supreme",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/supreme.jpg",
+    "asset": "assets/audio-opus/Supreme.opus"
+  },
+  {
+    "id": 70,
+    "title": "Aura",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/aura.jpg",
+    "asset": "assets/audio-opus/Aura.opus"
+  },
+  {
+    "id": 71,
+    "title": "Bachke Bachke",
+    "artist": "Karan Aujla, Ikky, Yarah",
+    "thumb": "assets/audio-thumb/karan_aujla.jpg",
+    "asset": "assets/audio-opus/Bachke Bachke.opus"
+  },
+  {
+    "id": 72,
+    "title": "52 Bars",
+    "artist": "Karan Aujla, Ikky",
+    "thumb": "assets/audio-thumb/52_bars.jpg",
+    "asset": "assets/audio-opus/52 Bars.opus"
+  },
+  {
+    "id": 73,
+    "title": "Antidote",
+    "artist": "Karan Aujla",
+    "thumb": "assets/audio-thumb/antidote.jpg",
+    "asset": "assets/audio-opus/Antidote.opus"
+  },
+  {
+    "id": 74,
+    "title": "Gangsta",
+    "artist": "Karan Aujla, YG",
+    "thumb": "assets/audio-thumb/gangsta.jpg",
+    "asset": "assets/audio-opus/Gangsta.opus"
+  },
+  {
+    "id": 75,
+    "title": "King Shit",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/king_shit.jpg",
+    "asset": "assets/audio-opus/King Shit.opus"
+  },
+  {
+    "id": 76,
+    "title": "Lalkara",
+    "artist": "Diljit Dosanjh, Intense, Sultaan",
+    "thumb": "assets/audio-thumb/lalkara.jpg",
+    "asset": "assets/audio-opus/Lalkara.opus"
+  },
+  {
+    "id": 77,
+    "title": "G.O.A.T.",
+    "artist": "Diljit Dosanjh",
+    "thumb": "assets/audio-thumb/diljit_dosanjh.jpg",
+    "asset": "assets/audio-opus/G.O.A.T..opus"
+  },
+  {
+    "id": 78,
+    "title": "OG",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/shubh.jpg",
+    "asset": "assets/audio-opus/OG.opus"
+  },
+  {
+    "id": 79,
+    "title": "MVP",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/mvp.jpg",
+    "asset": "assets/audio-opus/MVP.opus"
+  },
+  {
+    "id": 80,
+    "title": "Old Money",
+    "artist": "AP Dhillon",
+    "thumb": "assets/audio-thumb/old_money.jpg",
+    "asset": "assets/audio-opus/Old Money.opus"
+  },
+  {
+    "id": 81,
+    "title": "One Love",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/one_love.jpg",
+    "asset": "assets/audio-opus/One Love.opus"
+  },
+  {
+    "id": 82,
+    "title": "We Rollin",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/we_rollin.jpg",
+    "asset": "assets/audio-opus/We Rollin.opus"
+  },
+  {
+    "id": 83,
+    "title": "Still Rollin",
+    "artist": "Shubh",
+    "thumb": "assets/audio-thumb/shubh.jpg",
+    "asset": "assets/audio-opus/Still Rollin.opus"
+  },
+  {
+    "id": 84,
+    "title": "Winning Speech",
+    "artist": "Karan Aujla, Seshnolan",
+    "thumb": "assets/audio-thumb/winning_speech.jpg",
+    "asset": "assets/audio-opus/Winning Speech.opus"
+  },
+  {
+    "id": 85,
+    "title": "True Stories",
+    "artist": "AP Dhillon, Shinda Kahlon",
+    "thumb": "assets/audio-thumb/true_stories.jpg",
+    "asset": "assets/audio-opus/True Stories.opus"
+  },
+  {
+    "id": 86,
+    "title": "STFU",
+    "artist": "AP Dhillon, Shinda Kahlon",
+    "thumb": "assets/audio-thumb/stfu.jpg",
+    "asset": "assets/audio-opus/STFU.opus"
+  }
+]

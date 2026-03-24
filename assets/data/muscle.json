@@ -1,0 +1,21 @@
+[
+  { "part": "Chest", "muscle": "Lower Chest" },
+  { "part": "Chest", "muscle": "Mid Chest" },
+  { "part": "Chest", "muscle": "Upper Chest" },
+  { "part": "Back", "muscle": "Lats" },
+  { "part": "Back", "muscle": "Lower Back" },
+  { "part": "Back", "muscle": "Mid Back" },
+  { "part": "Back", "muscle": "Upper Back" },
+  { "part": "Back", "muscle": "Traps" },
+  { "part": "Shoulders", "muscle": "Front Delts" },
+  { "part": "Shoulders", "muscle": "Side Delts" },
+  { "part": "Shoulders", "muscle": "Rear Delts" },
+  { "part": "Arms", "muscle": "Short Head Bicep" },
+  { "part": "Arms", "muscle": "Long Head Bicep" },
+  { "part": "Arms", "muscle": "Long Head Tricep" },
+  { "part": "Arms", "muscle": "Lateral Head Tricep" },
+  { "part": "Legs", "muscle": "Quads" },
+  { "part": "Legs", "muscle": "Hamstrings" },
+  { "part": "Legs", "muscle": "Calves" },
+  { "part": "Legs", "muscle": "Glutes" }
+]
