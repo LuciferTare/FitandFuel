@@ -27,7 +27,7 @@ class HomeController extends GetxController {
       quotes.assignAll(results[0] as List<QuoteModel>);
       exercises.assignAll(results[1] as List<ExerciseHomeModel>);
     } catch (e) {
-      debugPrint('[LOG] $e');
+      debugPrint('[LOG] loadHomeData error: $e');
     } finally {
       isLoading.value = false;
     }

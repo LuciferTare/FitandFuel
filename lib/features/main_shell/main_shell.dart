@@ -44,8 +44,6 @@ class _MainShellState extends State<MainShell> {
         return Music();
       case 3:
         return CalorieCalculator();
-      // case 4:
-      //   return Profile();
       default:
         return Home();
     }

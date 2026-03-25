@@ -21,7 +21,7 @@ class RecipeController extends GetxController {
       List<RecipeListModel> data = await RecipeService().getRecipesData();
       recipeList.assignAll(data);
     } catch (e) {
-      debugPrint('[LOG] $e');
+      debugPrint('[LOG] getRecipes error: $e');
     } finally {
       isLoading.value = false;
     }
@@ -33,7 +33,7 @@ class RecipeController extends GetxController {
       RecipeModel data = await RecipeService().getRecipeData(id: id);
       recipe.value = data;
     } catch (e) {
-      debugPrint('[LOG] $e');
+      debugPrint('[LOG] getRecipe error: $e');
     } finally {
       isLoading.value = false;
     }

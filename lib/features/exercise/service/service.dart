@@ -23,8 +23,6 @@ class ExerciseService {
 
   Future<List<ExerciseModel>> getExerciseData(String part) async {
     try {
-      // var res = await Get.find<ApiClient>().getRequest<ExerciseModel>('/api/qoutes/', isAuth: true);
-      // var data = (res.data as List).map((item) => ExerciseModel.fromJson(item as Map<String, dynamic>)).toList();
       final jsonString = await rootBundle.loadString(
         'assets/data/exercises.json',
       );

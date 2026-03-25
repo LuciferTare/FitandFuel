@@ -14,7 +14,7 @@ class ExerciseController extends GetxController {
       final data = await ExerciseService().getMuscleData(part);
       muscles.assignAll(data);
     } catch (e) {
-      debugPrint('[LOG] $e');
+      debugPrint('[LOG] loadMuscleData error: $e');
     } finally {
       isLoading.value = false;
     }
@@ -26,7 +26,7 @@ class ExerciseController extends GetxController {
       final data = await ExerciseService().getExerciseData(part);
       exercises.assignAll(data);
     } catch (e) {
-      debugPrint('[LOG] $e');
+      debugPrint('[LOG] loadExerciseData error: $e');
     } finally {
       isLoading.value = false;
     }

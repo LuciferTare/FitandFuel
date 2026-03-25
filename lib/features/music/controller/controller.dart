@@ -9,42 +9,38 @@ import 'package:just_audio_background/just_audio_background.dart';
 class MusicController extends GetxController {
   RxList<PlaylistModel> playlists = <PlaylistModel>[].obs;
   RxList<SongModel> songs = <SongModel>[].obs;
-  RxBool isLoading = false.obs;
-  final AudioPlayer player = AudioPlayer();
-
-  // Playback state — lives here so it survives page navigation
-  final RxnInt currentPlaylistId = RxnInt();
-  final RxList<int> currentPlaylistSongIds = <int>[].obs;
-  final Rx<SongModel?> currentSong = Rx<SongModel?>(null);
-  final RxBool isSongOn = false.obs;
-  final RxnInt currentIdxInPlaylist = RxnInt();
-
-  StreamSubscription<int?>? _idxSub;
-  StreamSubscription<PlayerState>? _playerStateSub;
-  StreamSubscription<bool>? _playingSub;
-  StreamSubscription? _sequenceStateSub;
+  RxBool isLoading = false.obs, isSongOn = false.obs;
+  final player = AudioPlayer();
+  final currentPlaylistId = RxnInt();
+  final currentPlaylistSongIds = <int>[].obs;
+  final currentSong = Rx<SongModel?>(null);
+  final currentIdxInPlaylist = RxnInt();
+  StreamSubscription<int?>? idxSub;
+  StreamSubscription<PlayerState>? playerStateSub;
+  StreamSubscription<bool>? playingSub;
+  StreamSubscription? sequenceStateSub;
 
   @override
   void onReady() {
     super.onReady();
-    _setupPlayerListeners();
+    setupPlayerListeners();
     loadMusicData();
   }
 
-  void _setupPlayerListeners() {
-    _playingSub = player.playingStream.listen((playing) {
+  void setupPlayerListeners() {
+    playingSub = player.playingStream.listen((playing) {
       isSongOn.value = playing;
     });
-    _idxSub = player.currentIndexStream.listen((idx) {
+    idxSub = player.currentIndexStream.listen((idx) {
       currentIdxInPlaylist.value = idx;
-      _updateCurrentSongFromIndex(idx);
+      updateCurrentSongFromIndex(idx);
     });
-    _playerStateSub = player.playerStateStream.listen((state) {
+    playerStateSub = player.playerStateStream.listen((state) {
       if (state.processingState == ProcessingState.completed) {
         isSongOn.value = false;
       }
     });
-    _sequenceStateSub = player.sequenceStateStream.listen((state) {
+    sequenceStateSub = player.sequenceStateStream.listen((state) {
       final tag = state.currentSource?.tag;
       if (tag is MediaItem) {
         final id = tag.extras?['songId'];
@@ -56,7 +52,7 @@ class MusicController extends GetxController {
     });
   }
 
-  void _updateCurrentSongFromIndex(int? idx) {
+  void updateCurrentSongFromIndex(int? idx) {
     if (idx == null) {
       currentSong.value = null;
       return;
@@ -80,10 +76,10 @@ class MusicController extends GetxController {
 
   @override
   void onClose() {
-    _idxSub?.cancel();
-    _playerStateSub?.cancel();
-    _playingSub?.cancel();
-    _sequenceStateSub?.cancel();
+    idxSub?.cancel();
+    playerStateSub?.cancel();
+    playingSub?.cancel();
+    sequenceStateSub?.cancel();
     player.dispose();
     super.onClose();
   }
@@ -98,7 +94,7 @@ class MusicController extends GetxController {
       playlists.assignAll(results[0] as List<PlaylistModel>);
       songs.assignAll(results[1] as List<SongModel>);
     } catch (e) {
-      debugPrint('[LOG] $e');
+      debugPrint('[LOG] loadMusicData error: $e');
     } finally {
       isLoading.value = false;
     }

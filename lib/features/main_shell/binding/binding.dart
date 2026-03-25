@@ -21,12 +21,6 @@ class MainShellBinding extends Bindings {
       case 3:
         RecipeBinding().dependencies();
         break;
-      // case 4:
-      //   CalorieTrackerBinding().dependencies();
-      //   break;
-      // case 5:
-      //   ProfileBinding().dependencies();
-      //   break;
     }
   }
 }
