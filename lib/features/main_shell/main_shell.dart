@@ -74,7 +74,7 @@ class _MainShellState extends State<MainShell> {
         break;
       case 2:
         if (!Get.isRegistered<MusicController>()) {
-          Get.lazyPut(() => MusicController());
+          Get.put(MusicController(), permanent: true);
         }
         break;
       case 3:
@@ -82,11 +82,6 @@ class _MainShellState extends State<MainShell> {
           Get.lazyPut(() => RecipeController());
         }
         break;
-      // case 4:
-      //   if (!Get.isRegistered<ProfileController>()) {
-      //     Get.lazyPut(() => ProfileController());
-      //   }
-      //   break;
     }
   }
 

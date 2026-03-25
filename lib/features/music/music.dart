@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:fit_and_fuel/features/widgets/custom_textfields.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -23,55 +22,14 @@ class MusicState extends State<Music> {
   final musicController = Get.find<MusicController>();
   final searchC = TextEditingController();
   final searchFN = FocusNode();
-  List<model.PlaylistModel> playlists = [];
-  List<model.SongModel> songs = [];
-  int? expandedIdx, currentPlaylistId, currentIdxInPlaylist;
-  bool isSongOn = false;
+  int? expandedIdx;
   AudioPlayer get player => musicController.player;
-  List<int> currentPlaylistSongIds = [];
-  model.SongModel? currentSong;
-  StreamSubscription<int?>? idxSub;
-  StreamSubscription<PlayerState>? playerStateSub;
-  StreamSubscription<bool>? playingSub;
-  StreamSubscription? sequenceStateSub;
   final Map<String, String> assetFileCache = {};
 
   @override
   void initState() {
     super.initState();
     searchC.addListener(onSearchChanged);
-    playingSub = player.playingStream.listen((playing) {
-      setState(() {
-        isSongOn = playing;
-      });
-    });
-    idxSub = player.currentIndexStream.listen((idx) {
-      setState(() {
-        currentIdxInPlaylist = idx;
-        updateCurrentSongFromIndex(idx);
-      });
-    });
-    playerStateSub = player.playerStateStream.listen((state) {
-      if (state.processingState == ProcessingState.completed) {
-        setState(() {
-          isSongOn = false;
-        });
-      }
-    });
-    sequenceStateSub = player.sequenceStateStream.listen((state) {
-      final tag = state.currentSource?.tag;
-      if (tag is MediaItem) {
-        final id = tag.extras?['songId'];
-        if (id != null) {
-          final song = getSongById(id);
-          if (song != null) {
-            setState(() {
-              currentSong = song;
-            });
-          }
-        }
-      }
-    });
   }
 
   @override
@@ -79,10 +37,6 @@ class MusicState extends State<Music> {
     searchC.removeListener(onSearchChanged);
     searchC.dispose();
     searchFN.dispose();
-    idxSub?.cancel();
-    playerStateSub?.cancel();
-    playingSub?.cancel();
-    sequenceStateSub?.cancel();
     super.dispose();
   }
 
@@ -91,7 +45,7 @@ class MusicState extends State<Music> {
   void onPlaylistPlayTap(model.PlaylistModel playlist) async {
     final int? playlistId = playlist.id;
     if (playlistId == null) return;
-    if (currentPlaylistId != playlistId) {
+    if (musicController.currentPlaylistId.value != playlistId) {
       await loadPlaylistIntoPlayer(playlist, startIndex: 0, autoPlay: true);
       return;
     }
@@ -116,9 +70,7 @@ class MusicState extends State<Music> {
 
   void skipNext() async {
     try {
-      if (player.hasNext) {
-        await player.seekToNext();
-      } else {}
+      if (player.hasNext) await player.seekToNext();
     } catch (err) {
       debugPrint('[LOG] skipNext error: $err');
     }
@@ -126,9 +78,7 @@ class MusicState extends State<Music> {
 
   void skipPrevious() async {
     try {
-      if (player.hasPrevious) {
-        await player.seekToPrevious();
-      } else {}
+      if (player.hasPrevious) await player.seekToPrevious();
     } catch (err) {
       debugPrint('[LOG] skipPrevious error: $err');
     }
@@ -144,22 +94,20 @@ class MusicState extends State<Music> {
       debugPrint('[LOG] Playlist contains no song ids.');
       return;
     }
-    final orderedSongs =
-        ids.map((id) => getSongById(id)).whereType<model.SongModel>().toList();
+    final orderedSongs = ids
+        .map((id) => musicController.getSongById(id))
+        .whereType<model.SongModel>()
+        .toList();
     if (orderedSongs.isEmpty) {
-      debugPrint(
-        '[LOG] No matching songs found for playlist ${playlist.title}',
-      );
+      debugPrint('[LOG] No matching songs found for playlist ${playlist.title}');
       return;
     }
     final List<AudioSource> sources = [];
-
     for (final song in orderedSongs) {
       final assetPath = song.asset ?? '';
       if (assetPath.isEmpty) continue;
       final encodedPath = Uri.encodeFull(assetPath);
       final uri = Uri.parse('asset:///$encodedPath');
-
       final mediaItem = await mediaItemFromSong(song);
       sources.add(AudioSource.uri(uri, tag: mediaItem));
     }
@@ -174,62 +122,22 @@ class MusicState extends State<Music> {
         initialIndex: startIndex,
         initialPosition: Duration.zero,
       );
-      setState(() {
-        currentPlaylistId = playlist.id;
-        currentPlaylistSongIds = ids.toList();
-        currentIdxInPlaylist = startIndex;
-        currentSong =
-            orderedSongs.length > startIndex
-                ? orderedSongs[startIndex]
-                : orderedSongs.first;
-      });
-      if (autoPlay) {
-        await player.play();
-      }
+      musicController.currentPlaylistId.value = playlist.id;
+      musicController.currentPlaylistSongIds.assignAll(ids);
+      musicController.currentIdxInPlaylist.value = startIndex;
+      musicController.currentSong.value =
+          orderedSongs.length > startIndex
+              ? orderedSongs[startIndex]
+              : orderedSongs.first;
+      if (autoPlay) await player.play();
     } catch (e) {
       debugPrint('[LOG] Error loading playlist: $e');
     }
   }
 
-  void updateCurrentSongFromIndex(int? idx) {
-    if (idx == null) {
-      currentSong = null;
-      return;
-    }
-    if (currentPlaylistSongIds.isNotEmpty &&
-        idx >= 0 &&
-        idx < currentPlaylistSongIds.length) {
-      final id = currentPlaylistSongIds[idx];
-      final s = getSongById(id);
-      currentSong = s;
-    } else {
-      currentSong = null;
-    }
-  }
-
   bool isPlaylistActive(int? playlistId) {
     if (playlistId == null) return false;
-    return currentPlaylistId == playlistId;
-  }
-
-  List<String> titlesForPlaylist(int playlistIndex) {
-    if (playlistIndex < 0 || playlistIndex >= playlists.length) return [];
-    final p = playlists[playlistIndex];
-    final ids = p.songIds ?? [];
-    final titles = <String>[];
-    for (final id in ids) {
-      final s = getSongById(id);
-      if (s != null) titles.add(s.title ?? 'Untitled');
-    }
-    return titles;
-  }
-
-  model.SongModel? getSongById(int id) {
-    try {
-      return songs.firstWhere((s) => s.id == id);
-    } catch (e) {
-      return null;
-    }
+    return musicController.currentPlaylistId.value == playlistId;
   }
 
   Future<MediaItem> mediaItemFromSong(model.SongModel song) async {
@@ -280,9 +188,8 @@ class MusicState extends State<Music> {
           );
         }
 
-        playlists = musicController.playlists;
-        songs = musicController.songs;
-        final cs = currentSong;
+        final playlists = musicController.playlists;
+        final cs = musicController.currentSong.value;
         final query = searchC.text.trim().toLowerCase();
         final displayPlaylists =
             query.isEmpty
@@ -414,7 +321,7 @@ class MusicState extends State<Music> {
                             GestureDetector(
                               onTap: togglePlayPause,
                               child: Icon(
-                                isSongOn
+                                musicController.isSongOn.value
                                     ? Icons.pause_outlined
                                     : Icons.play_arrow_outlined,
                                 size: 30,
@@ -584,15 +491,17 @@ class MusicState extends State<Music> {
                             ),
                           ),
                           SizedBox(width: 10),
-                          GestureDetector(
+                          InkWell(
                             onTap: () => onPlaylistPlayTap(playlist),
+                            borderRadius: BorderRadius.circular(15),
                             child: Container(
                               height: 30,
                               width: 30,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
-                                      isPlaylistActive(id) && isSongOn
+                                      isPlaylistActive(id) &&
+                                              musicController.isSongOn.value
                                           ? Color(0xBEFCD535)
                                           : Color(0xBED9D9D9),
                                 ),
@@ -601,7 +510,8 @@ class MusicState extends State<Music> {
                               padding: EdgeInsets.all(2.5),
                               child: Center(
                                 child: Image.asset(
-                                  isPlaylistActive(id) && isSongOn
+                                  isPlaylistActive(id) &&
+                                          musicController.isSongOn.value
                                       ? 'assets/images/pause.png'
                                       : 'assets/images/play.png',
                                   fit: BoxFit.contain,
@@ -640,12 +550,14 @@ class MusicState extends State<Music> {
                           separatorBuilder: (_, __) => SizedBox(height: 10),
                           itemBuilder: (context, sId) {
                             final songId = sIDs[sId];
-                            final song = getSongById(songId);
+                            final song = musicController.getSongById(songId);
                             final songTitle = song?.title ?? 'Untitled';
                             final isActive =
                                 isPlaylistActive(id) &&
-                                currentIdxInPlaylist == sId;
-                            return GestureDetector(
+                                musicController.currentIdxInPlaylist.value ==
+                                    sId;
+                            return InkWell(
+                              borderRadius: BorderRadius.circular(8),
                               onTap: () async {
                                 if (isPlaylistActive(id)) {
                                   await player.seek(Duration.zero, index: sId);
