@@ -30,6 +30,8 @@ class RecipeState extends State<Recipe> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
@@ -37,17 +39,21 @@ class RecipeState extends State<Recipe> {
         Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 1});
       },
       child: Scaffold(
-        backgroundColor: Color(0xFF181A20),
+        backgroundColor: const Color(0xFF181A20),
         body: Obx(() {
           if (recipeController.isLoading.value) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(color: Color(0xFFFCD535)),
             );
           }
 
           final recipe = recipeController.recipe.value;
+          final ingredients = recipe.ingredients;
+          final steps = recipe.steps;
+          final tips = recipe.tips;
+
           return RefreshIndicator(
-            color: Color(0xFFFCD535),
+            color: const Color(0xFFFCD535),
             onRefresh: loadRecipe,
             child: SafeArea(
               child: SingleChildScrollView(
@@ -63,8 +69,8 @@ class RecipeState extends State<Recipe> {
                               Image.asset(
                                 recipe.image ??
                                     'assets/recipe-thumb/default.png',
-                                width: MediaQuery.of(context).size.width,
-                                height: MediaQuery.of(context).size.width,
+                                width: screenWidth,
+                                height: screenWidth,
                                 colorBlendMode: BlendMode.lighten,
                                 color: Color(0xFF181A20),
                                 fit: BoxFit.cover,
@@ -133,31 +139,14 @@ class RecipeState extends State<Recipe> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: Stack(
-                                          children: [
-                                            Text(
-                                              '${recipe.heading}',
-                                              style: TextStyle(
-                                                fontSize: 28,
-                                                fontWeight: FontWeight.w900,
-                                                foreground:
-                                                    Paint()
-                                                      ..style =
-                                                          PaintingStyle.stroke
-                                                      ..color = Color(
-                                                        0xFFD9D9D9,
-                                                      ),
-                                              ),
-                                            ),
-                                            Text(
-                                              '${recipe.heading}',
-                                              style: TextStyle(
-                                                fontSize: 28,
-                                                fontWeight: FontWeight.w900,
-                                                color: Color(0xFFD9D9D9),
-                                              ),
-                                            ),
-                                          ],
+                                        child: Text(
+                                          '${recipe.heading}',
+                                          style: TextStyle(
+                                            height: 1,
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.w900,
+                                            color: Color(0xFFD9D9D9),
+                                          ),
                                         ),
                                       ),
                                       SizedBox(width: 10),
@@ -171,7 +160,10 @@ class RecipeState extends State<Recipe> {
                                             20,
                                           ),
                                         ),
-                                        padding: EdgeInsets.all(10),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 7.5,
+                                          horizontal: 10,
+                                        ),
                                         child: Center(
                                           child: Text(
                                             'Serves ${recipe.serve}',
@@ -179,7 +171,7 @@ class RecipeState extends State<Recipe> {
                                               height: 1,
                                               fontSize: 16,
                                               color: Color(0xFFFCD535),
-                                              fontWeight: FontWeight.w900,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                         ),
@@ -240,63 +232,49 @@ class RecipeState extends State<Recipe> {
                         ],
                       ),
                     ),
-                    if (recipe.ingredients != null &&
-                        recipe.ingredients!.isNotEmpty) ...[
+                    if (ingredients != null && ingredients.isNotEmpty) ...[
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: const Row(
                           children: [
-                            Stack(
-                              children: [
-                                Text(
-                                  'Ingredients',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w900,
-                                    foreground:
-                                        Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..color = Color(0xBED9D9D9),
-                                  ),
-                                ),
-                                Text(
-                                  'Ingredients',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color(0xBED9D9D9),
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                              ],
+                            Text(
+                              'Ingredients',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w900,
+                                color: Color(0xBED9D9D9),
+                              ),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         alignment: Alignment.centerLeft,
                         child: Wrap(
                           spacing: 7.5,
                           runSpacing: 7.5,
                           children:
-                              recipe.ingredients!.map((i) {
+                              ingredients.map((i) {
                                 return Container(
-                                  padding: EdgeInsets.all(10),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 7.5,
+                                    horizontal: 10,
+                                  ),
                                   decoration: BoxDecoration(
-                                    color: Color(0x13D9D9D9),
+                                    color: const Color(0x13D9D9D9),
                                     border: Border.all(
                                       width: 0.5,
-                                      color: Color(0x3ED9D9D9),
+                                      color: const Color(0x3ED9D9D9),
                                     ),
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(7.5),
                                   ),
                                   child: Text(
                                     i,
-                                    style: TextStyle(
-                                      height: 1,
+                                    style: const TextStyle(
+                                      fontSize: 14,
                                       color: Color(0xFFD9D9D9),
-                                      fontSize: 18,
+                                      height: 1,
                                     ),
                                   ),
                                 );
@@ -304,34 +282,19 @@ class RecipeState extends State<Recipe> {
                         ),
                       ),
                     ],
-                    if (recipe.steps != null && recipe.steps!.isNotEmpty) ...[
+                    if (steps != null && steps.isNotEmpty) ...[
                       SizedBox(height: 10),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: Row(
                           children: [
-                            Stack(
-                              children: [
-                                Text(
-                                  'Steps',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w900,
-                                    foreground:
-                                        Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..color = Color(0xBED9D9D9),
-                                  ),
-                                ),
-                                Text(
-                                  'Steps',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color(0xBED9D9D9),
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              'Steps',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w900,
+                                color: Color(0xBED9D9D9),
+                              ),
                             ),
                           ],
                         ),
@@ -340,10 +303,10 @@ class RecipeState extends State<Recipe> {
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.symmetric(horizontal: 12),
-                        itemCount: recipe.steps?.length ?? 0,
+                        itemCount: steps.length,
                         itemBuilder: (context, index) {
-                          final step = recipe.steps![index];
-                          final isLast = index == recipe.steps!.length - 1;
+                          final step = steps[index];
+                          final isLast = index == steps.length - 1;
 
                           return IntrinsicHeight(
                             child: Row(
@@ -352,8 +315,8 @@ class RecipeState extends State<Recipe> {
                                 Column(
                                   children: [
                                     Container(
-                                      width: 30,
-                                      height: 30,
+                                      width: 25,
+                                      height: 25,
                                       margin: EdgeInsets.symmetric(
                                         vertical: 7.5,
                                       ),
@@ -376,7 +339,6 @@ class RecipeState extends State<Recipe> {
                                         ),
                                       ),
                                     ),
-
                                     if (!isLast)
                                       Expanded(
                                         child: Container(
@@ -393,7 +355,7 @@ class RecipeState extends State<Recipe> {
                                     child: Text(
                                       step,
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         color: Color(0xBED9D9D9),
                                       ),
                                     ),
@@ -405,34 +367,19 @@ class RecipeState extends State<Recipe> {
                         },
                       ),
                     ],
-                    if (recipe.tips != null && recipe.tips!.isNotEmpty) ...[
+                    if (tips != null && tips.isNotEmpty) ...[
                       SizedBox(height: 10),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: Row(
                           children: [
-                            Stack(
-                              children: [
-                                Text(
-                                  'Pro Tips',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w900,
-                                    foreground:
-                                        Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..color = Color(0xBED9D9D9),
-                                  ),
-                                ),
-                                Text(
-                                  'Pro Tips',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color(0xBED9D9D9),
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              'Pro Tips',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w900,
+                                color: Color(0xBED9D9D9),
+                              ),
                             ),
                           ],
                         ),
@@ -440,9 +387,9 @@ class RecipeState extends State<Recipe> {
                       ListView.separated(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: recipe.tips?.length ?? 0,
+                        itemCount: tips.length,
                         itemBuilder: (context, index) {
-                          final tip = recipe.tips![index];
+                          final tip = tips[index];
 
                           return Container(
                             decoration: BoxDecoration(
@@ -489,7 +436,6 @@ class RecipeState extends State<Recipe> {
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color(0xFFD9D9D9),
-                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
@@ -506,50 +452,52 @@ class RecipeState extends State<Recipe> {
             ),
           );
         }),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: Color(0x0BD9D9D9),
-            border: Border.all(width: 1, color: Color(0x18D9D9D9)),
-            borderRadius: BorderRadius.circular(38),
-          ),
-          margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
-          padding: EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              navButton(
-                image: 'assets/images/home.png',
-                isActive: false,
-                label: 'Home',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 0});
-                },
-              ),
-              navButton(
-                image: 'assets/images/recipe.png',
-                isActive: true,
-                label: 'Recipe',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 1});
-                },
-              ),
-              navButton(
-                image: 'assets/images/music.png',
-                isActive: false,
-                label: 'Music',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 2});
-                },
-              ),
-              navButton(
-                image: 'assets/images/calculator.png',
-                isActive: false,
-                label: 'Calc.',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 3});
-                },
-              ),
-            ],
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0x0BD9D9D9),
+              border: Border.all(width: 1, color: const Color(0x18D9D9D9)),
+              borderRadius: BorderRadius.circular(38),
+            ),
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+            padding: const EdgeInsets.all(5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                navButton(
+                  image: 'assets/images/home.png',
+                  isActive: false,
+                  label: 'Home',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 0});
+                  },
+                ),
+                navButton(
+                  image: 'assets/images/recipe.png',
+                  isActive: true,
+                  label: 'Recipe',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 1});
+                  },
+                ),
+                navButton(
+                  image: 'assets/images/music.png',
+                  isActive: false,
+                  label: 'Music',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 2});
+                  },
+                ),
+                navButton(
+                  image: 'assets/images/calculator.png',
+                  isActive: false,
+                  label: 'Calc.',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 3});
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -570,31 +518,14 @@ class RecipeState extends State<Recipe> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Text(
-                value,
-                style: TextStyle(
-                  height: 1,
-                  fontSize: 20,
-                  foreground:
-                      Paint()
-                        ..style = PaintingStyle.stroke
-                        ..color = color,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              Text(
-                value,
-                style: TextStyle(
-                  height: 1,
-                  fontSize: 20,
-                  color: color,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ],
+          Text(
+            value,
+            style: TextStyle(
+              height: 1,
+              fontSize: 20,
+              color: color,
+              fontWeight: FontWeight.w900,
+            ),
           ),
           SizedBox(height: 10),
           Text(

@@ -298,14 +298,14 @@ class ExerciseState extends State<Exercise> {
                     child: Text(
                       part,
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.displayMedium?.color,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFD9D9D9),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 30, width: 30),
+                SizedBox(height: 35, width: 35),
               ],
             ),
           ),
@@ -456,50 +456,52 @@ class ExerciseState extends State<Exercise> {
             ),
           );
         }),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: Color(0x0BD9D9D9),
-            border: Border.all(width: 1, color: Color(0x18D9D9D9)),
-            borderRadius: BorderRadius.circular(38),
-          ),
-          margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
-          padding: EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              navButton(
-                image: 'assets/images/home.png',
-                isActive: true,
-                label: 'Home',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 0});
-                },
-              ),
-              navButton(
-                image: 'assets/images/recipe.png',
-                isActive: false,
-                label: 'Recipe',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 1});
-                },
-              ),
-              navButton(
-                image: 'assets/images/music.png',
-                isActive: false,
-                label: 'Music',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 2});
-                },
-              ),
-              navButton(
-                image: 'assets/images/calculator.png',
-                isActive: false,
-                label: 'Calc.',
-                onTap: () {
-                  Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 3});
-                },
-              ),
-            ],
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0x0BD9D9D9),
+              border: Border.all(width: 1, color: Color(0x18D9D9D9)),
+              borderRadius: BorderRadius.circular(38),
+            ),
+            margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+            padding: EdgeInsets.all(5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                navButton(
+                  image: 'assets/images/home.png',
+                  isActive: true,
+                  label: 'Home',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 0});
+                  },
+                ),
+                navButton(
+                  image: 'assets/images/recipe.png',
+                  isActive: false,
+                  label: 'Recipe',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 1});
+                  },
+                ),
+                navButton(
+                  image: 'assets/images/music.png',
+                  isActive: false,
+                  label: 'Music',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 2});
+                  },
+                ),
+                navButton(
+                  image: 'assets/images/calculator.png',
+                  isActive: false,
+                  label: 'Calc.',
+                  onTap: () {
+                    Get.offAllNamed(MyRoutes.shellRoute, arguments: {'idx': 3});
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -548,7 +550,13 @@ class ExerciseState extends State<Exercise> {
       ),
       child: GestureDetector(
         onTap: () async {
-          await togglePlayback(index: index, videoAsset: '${e.asset}');
+          final hasVideo = e.asset != null && e.asset!.isNotEmpty;
+          setState(() {
+            playingIndex = (playingIndex == index) ? -1 : index;
+          });
+          if (hasVideo) {
+            await togglePlayback(index: index, videoAsset: e.asset!);
+          }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -575,28 +583,13 @@ class ExerciseState extends State<Exercise> {
                           color: Color(0xBE181A20),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Stack(
-                          children: [
-                            Text(
-                              '${e.muscle}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xFFD9D9D9),
-                              ),
-                            ),
-                            Text(
-                              '${e.muscle}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w900,
-                                foreground:
-                                    Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..color = Color(0xFFD9D9D9),
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          '${e.muscle}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFFD9D9D9),
+                          ),
                         ),
                       ),
                     ),
@@ -626,30 +619,17 @@ class ExerciseState extends State<Exercise> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Stack(
-                          children: [
-                            Text(
-                              e.name ?? 'N/A',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                foreground:
-                                    Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..color = Color(0xFFD9D9D9),
-                              ),
-                            ),
-                            Text(
-                              e.name ?? 'N/A',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFD9D9D9),
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          e.name ?? 'N/A',
+                          style: TextStyle(
+                            height: 1.25,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFD9D9D9),
+                          ),
                         ),
                       ),
                       SizedBox(width: 10),
@@ -664,8 +644,8 @@ class ExerciseState extends State<Exercise> {
                           style: TextStyle(
                             height: 1,
                             fontSize: 14,
-                            fontWeight: FontWeight.w900,
-                            color: Color(0x7ED9D9D9),
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xBED9D9D9),
                           ),
                         ),
                       ),
@@ -683,28 +663,13 @@ class ExerciseState extends State<Exercise> {
                       children: [
                         Row(
                           children: [
-                            Stack(
-                              children: [
-                                Text(
-                                  'Execution',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                    foreground:
-                                        Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..color = Color(0xFFD9D9D9),
-                                  ),
-                                ),
-                                Text(
-                                  'Execution',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color(0xFFD9D9D9),
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              'Execution',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFFD9D9D9),
+                              ),
                             ),
                             Spacer(),
                             Icon(

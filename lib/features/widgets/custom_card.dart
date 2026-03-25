@@ -49,9 +49,9 @@ Widget recipeCard({required model.RecipeListModel recipe}) {
                         child: Text(
                           '${recipe.heading}',
                           style: TextStyle(
-                            height: 1,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w900,
+                            height: 1.1,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
                             color: Color(0xFFD9D9D9),
                           ),
                         ),
@@ -59,8 +59,8 @@ Widget recipeCard({required model.RecipeListModel recipe}) {
                       SizedBox(width: 10),
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
+                          horizontal: 7.5,
+                          vertical: 3.5,
                         ),
                         decoration: BoxDecoration(
                           color: Color(0x3ED9D9D9),
@@ -88,6 +88,7 @@ Widget recipeCard({required model.RecipeListModel recipe}) {
                             style: TextStyle(
                               height: 1,
                               fontSize: 16,
+                              fontWeight: FontWeight.w500,
                               color: Color(0x7ED9D9D9),
                             ),
                           ),
@@ -112,6 +113,7 @@ Widget recipeCard({required model.RecipeListModel recipe}) {
                             style: TextStyle(
                               height: 1,
                               fontSize: 16,
+                              fontWeight: FontWeight.w500,
                               color: Color(0x7ED9D9D9),
                             ),
                           ),
@@ -136,6 +138,7 @@ Widget recipeCard({required model.RecipeListModel recipe}) {
                             style: TextStyle(
                               height: 1,
                               fontSize: 16,
+                              fontWeight: FontWeight.w500,
                               color: Color(0x7ED9D9D9),
                             ),
                           ),
@@ -160,6 +163,7 @@ Widget recipeCard({required model.RecipeListModel recipe}) {
                             style: TextStyle(
                               height: 1,
                               fontSize: 16,
+                              fontWeight: FontWeight.w500,
                               color: Color(0x7ED9D9D9),
                             ),
                           ),

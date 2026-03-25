@@ -90,7 +90,7 @@ class RecipeListState extends State<RecipeList> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 12.5),
+                  SizedBox(height: 10),
                   Row(
                     children: [
                       Text(

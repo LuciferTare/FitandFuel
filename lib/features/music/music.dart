@@ -94,12 +94,15 @@ class MusicState extends State<Music> {
       debugPrint('[LOG] Playlist contains no song ids.');
       return;
     }
-    final orderedSongs = ids
-        .map((id) => musicController.getSongById(id))
-        .whereType<model.SongModel>()
-        .toList();
+    final orderedSongs =
+        ids
+            .map((id) => musicController.getSongById(id))
+            .whereType<model.SongModel>()
+            .toList();
     if (orderedSongs.isEmpty) {
-      debugPrint('[LOG] No matching songs found for playlist ${playlist.title}');
+      debugPrint(
+        '[LOG] No matching songs found for playlist ${playlist.title}',
+      );
       return;
     }
     final List<AudioSource> sources = [];
@@ -229,6 +232,7 @@ class MusicState extends State<Music> {
                     Text(
                       titleText,
                       style: TextStyle(
+                        height: 1,
                         fontSize: 24,
                         fontWeight: FontWeight.w900,
                         color: Color(0xFFD9D9D9),
@@ -253,122 +257,125 @@ class MusicState extends State<Music> {
           bottomNavigationBar:
               cs == null
                   ? null
-                  : Container(
-                    decoration: BoxDecoration(
-                      color: Color(0x0BD9D9D9),
-                      border: Border.all(width: 1, color: Color(0x18D9D9D9)),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    padding: EdgeInsets.fromLTRB(12.5, 10, 10, 0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: Image.asset(
-                                cs.thumb ?? 'assets/audio-thumb/default.png',
-                                width: 45,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(width: 7.5),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    cs.title ?? 'Unknown',
-                                    style: TextStyle(
-                                      height: 1.1,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFFD9D9D9),
-                                      shadows: [
-                                        Shadow(
-                                          offset: Offset(0, 1),
-                                          blurRadius: 2,
-                                          color: Color(0xFF181A20),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    cs.artist ?? 'Unknown',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0x7ED9D9D9),
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 7.5),
-                            GestureDetector(
-                              onTap: skipPrevious,
-                              child: Icon(
-                                Icons.skip_previous_outlined,
-                                size: 30,
-                                color: Color(0xFFD9D9D9),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: togglePlayPause,
-                              child: Icon(
-                                musicController.isSongOn.value
-                                    ? Icons.pause_outlined
-                                    : Icons.play_arrow_outlined,
-                                size: 30,
-                                color: Color(0xFFFCD535),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: skipNext,
-                              child: Icon(
-                                Icons.skip_next_outlined,
-                                size: 30,
-                                color: Color(0xFFD9D9D9),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 7.5),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: StreamBuilder<Duration>(
-                            stream: player.positionStream,
-                            builder: (context, snapshot) {
-                              final position = snapshot.data ?? Duration.zero;
-                              final duration = player.duration ?? Duration.zero;
-
-                              final progress =
-                                  duration.inMilliseconds > 0
-                                      ? (position.inMilliseconds /
-                                              duration.inMilliseconds)
-                                          .clamp(0.0, 1.0)
-                                      : 0.0;
-
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(2),
-                                child: LinearProgressIndicator(
-                                  value: progress,
-                                  minHeight: 2,
-                                  backgroundColor: Colors.transparent,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Color(0xFFFCD535),
-                                  ),
+                  : SafeArea(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0x0BD9D9D9),
+                        border: Border.all(width: 1, color: Color(0x18D9D9D9)),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: EdgeInsets.fromLTRB(12.5, 10, 10, 0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.asset(
+                                  cs.thumb ?? 'assets/audio-thumb/default.png',
+                                  width: 45,
+                                  fit: BoxFit.cover,
                                 ),
-                              );
-                            },
+                              ),
+                              SizedBox(width: 7.5),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      cs.title ?? 'Unknown',
+                                      style: TextStyle(
+                                        height: 1.1,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFFD9D9D9),
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(0, 1),
+                                            blurRadius: 2,
+                                            color: Color(0xFF181A20),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Text(
+                                      cs.artist ?? 'Unknown',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0x7ED9D9D9),
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 7.5),
+                              GestureDetector(
+                                onTap: skipPrevious,
+                                child: Icon(
+                                  Icons.skip_previous_outlined,
+                                  size: 30,
+                                  color: Color(0xFFD9D9D9),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: togglePlayPause,
+                                child: Icon(
+                                  musicController.isSongOn.value
+                                      ? Icons.pause_outlined
+                                      : Icons.play_arrow_outlined,
+                                  size: 30,
+                                  color: Color(0xFFFCD535),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: skipNext,
+                                child: Icon(
+                                  Icons.skip_next_outlined,
+                                  size: 30,
+                                  color: Color(0xFFD9D9D9),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 7.5),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: StreamBuilder<Duration>(
+                              stream: player.positionStream,
+                              builder: (context, snapshot) {
+                                final position = snapshot.data ?? Duration.zero;
+                                final duration =
+                                    player.duration ?? Duration.zero;
+
+                                final progress =
+                                    duration.inMilliseconds > 0
+                                        ? (position.inMilliseconds /
+                                                duration.inMilliseconds)
+                                            .clamp(0.0, 1.0)
+                                        : 0.0;
+
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(2),
+                                  child: LinearProgressIndicator(
+                                    value: progress,
+                                    minHeight: 2,
+                                    backgroundColor: Colors.transparent,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Color(0xFFFCD535),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
         );
@@ -456,38 +463,18 @@ class MusicState extends State<Music> {
                           ),
                           SizedBox(width: 10),
                           Expanded(
-                            child: Stack(
-                              children: [
-                                Text(
-                                  title,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                    foreground:
-                                        Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..color =
-                                              isPlaylistActive(id)
-                                                  ? Color(0xFFFCD535)
-                                                  : Color(0xFFD9D9D9),
-                                  ),
-                                ),
-                                Text(
-                                  title,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                    color:
-                                        isPlaylistActive(id)
-                                            ? Color(0xFFFCD535)
-                                            : Color(0xFFD9D9D9),
-                                  ),
-                                ),
-                              ],
+                            child: Text(
+                              title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                                color:
+                                    isPlaylistActive(id)
+                                        ? Color(0xFFFCD535)
+                                        : Color(0xFFD9D9D9),
+                              ),
                             ),
                           ),
                           SizedBox(width: 10),
@@ -589,7 +576,7 @@ class MusicState extends State<Music> {
                                                 style: TextStyle(
                                                   height: 1,
                                                   fontSize: 18,
-                                                  fontWeight: FontWeight.w900,
+                                                  fontWeight: FontWeight.w700,
                                                   color: Color(0x7ED9D9D9),
                                                 ),
                                               ),

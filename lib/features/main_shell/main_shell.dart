@@ -101,54 +101,56 @@ class _MainShellState extends State<MainShell> {
           child: getPage(currentIdx),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Color(0x0BD9D9D9),
-          border: Border.all(width: 1, color: Color(0x18D9D9D9)),
-          borderRadius: BorderRadius.circular(38),
-        ),
-        margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
-        padding: EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            navButton(
-              image: 'assets/images/home.png',
-              isActive: currentIdx == 0,
-              label: 'Home',
-              onTap: () {
-                ensureBinding(0);
-                setState(() => currentIdx = 0);
-              },
-            ),
-            navButton(
-              image: 'assets/images/recipe.png',
-              isActive: currentIdx == 1,
-              label: 'Recipe',
-              onTap: () {
-                ensureBinding(1);
-                setState(() => currentIdx = 1);
-              },
-            ),
-            navButton(
-              image: 'assets/images/music.png',
-              isActive: currentIdx == 2,
-              label: 'Music',
-              onTap: () {
-                ensureBinding(2);
-                setState(() => currentIdx = 2);
-              },
-            ),
-            navButton(
-              image: 'assets/images/calculator.png',
-              isActive: currentIdx == 3,
-              label: 'Calc.',
-              onTap: () {
-                ensureBinding(3);
-                setState(() => currentIdx = 3);
-              },
-            ),
-          ],
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color(0x0BD9D9D9),
+            border: Border.all(width: 1, color: Color(0x18D9D9D9)),
+            borderRadius: BorderRadius.circular(38),
+          ),
+          margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+          padding: EdgeInsets.all(5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              navButton(
+                image: 'assets/images/home.png',
+                isActive: currentIdx == 0,
+                label: 'Home',
+                onTap: () {
+                  ensureBinding(0);
+                  setState(() => currentIdx = 0);
+                },
+              ),
+              navButton(
+                image: 'assets/images/recipe.png',
+                isActive: currentIdx == 1,
+                label: 'Recipe',
+                onTap: () {
+                  ensureBinding(1);
+                  setState(() => currentIdx = 1);
+                },
+              ),
+              navButton(
+                image: 'assets/images/music.png',
+                isActive: currentIdx == 2,
+                label: 'Music',
+                onTap: () {
+                  ensureBinding(2);
+                  setState(() => currentIdx = 2);
+                },
+              ),
+              navButton(
+                image: 'assets/images/calculator.png',
+                isActive: currentIdx == 3,
+                label: 'Calc.',
+                onTap: () {
+                  ensureBinding(3);
+                  setState(() => currentIdx = 3);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

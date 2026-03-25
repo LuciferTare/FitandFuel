@@ -40,33 +40,15 @@ class HomeState extends State<Home> {
             children: [
               Row(
                 children: [
-                  Stack(
-                    children: [
-                      Text(
-                        'DAILY MOTIVATION',
-                        style: TextStyle(
-                          height: 1,
-                          letterSpacing: 1.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                          foreground:
-                              Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 1.1
-                                ..color = Color(0x7ED9D9D9),
-                        ),
-                      ),
-                      Text(
-                        'DAILY MOTIVATION',
-                        style: TextStyle(
-                          height: 1,
-                          letterSpacing: 1.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0x7ED9D9D9),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    'DAILY MOTIVATION',
+                    style: TextStyle(
+                      height: 1,
+                      letterSpacing: 1.5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xBED9D9D9),
+                    ),
                   ),
                 ],
               ),
@@ -127,28 +109,13 @@ class HomeState extends State<Home> {
               SizedBox(height: 12),
               Row(
                 children: [
-                  Stack(
-                    children: [
-                      Text(
-                        'Workouts',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w900,
-                          foreground:
-                              Paint()
-                                ..style = PaintingStyle.stroke
-                                ..color = Color(0xFFD9D9D9),
-                        ),
-                      ),
-                      Text(
-                        'Workouts',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0xFFD9D9D9),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    'Workouts',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFFD9D9D9),
+                    ),
                   ),
                 ],
               ),
@@ -233,28 +200,13 @@ class HomeState extends State<Home> {
               Positioned(
                 left: 12,
                 bottom: 12,
-                child: Stack(
-                  children: [
-                    Text(
-                      '${exercise.part}',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w900,
-                        foreground:
-                            Paint()
-                              ..style = PaintingStyle.stroke
-                              ..color = Color(0xFFD9D9D9),
-                      ),
-                    ),
-                    Text(
-                      '${exercise.part}',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w900,
-                        color: Color(0xFFD9D9D9),
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  '${exercise.part}',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFFD9D9D9),
+                  ),
                 ),
               ),
             ],

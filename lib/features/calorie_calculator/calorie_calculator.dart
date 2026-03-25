@@ -231,6 +231,7 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
                         Text(
                           'Set you Goal',
                           style: TextStyle(
+                            height: 1,
                             fontSize: 16,
                             color: Color(0xBED9D9D9),
                           ),
@@ -258,6 +259,7 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
                         Text(
                           'Gender',
                           style: TextStyle(
+                            height: 1,
                             fontSize: 16,
                             color: Color(0xBED9D9D9),
                           ),
@@ -403,28 +405,13 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
                 SizedBox(height: 10),
                 Row(
                   children: [
-                    Stack(
-                      children: [
-                        Text(
-                          'Your Calorie Goal',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            foreground:
-                                Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..color = Color(0xBED9D9D9),
-                          ),
-                        ),
-                        Text(
-                          'Your Calorie Goal',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: Color(0xBED9D9D9),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'Your Calorie Goal',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xBED9D9D9),
+                      ),
                     ),
                   ],
                 ),
@@ -458,30 +445,14 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
                           textBaseline: TextBaseline.alphabetic,
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           children: [
-                            Stack(
-                              children: [
-                                Text(
-                                  '$calories',
-                                  style: TextStyle(
-                                    height: 1,
-                                    foreground:
-                                        Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..color = Color(0xFFFCD535),
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                                Text(
-                                  '$calories',
-                                  style: TextStyle(
-                                    height: 1,
-                                    color: Color(0xFFFCD535),
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              '$calories',
+                              style: TextStyle(
+                                height: 1,
+                                color: Color(0xFFFCD535),
+                                fontSize: 32,
+                                fontWeight: FontWeight.w900,
+                              ),
                             ),
                             SizedBox(width: 7.5),
                             Text(
@@ -518,28 +489,13 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Stack(
-                        children: [
-                          Text(
-                            'Per-meal breakdown (${mealsC.text} Meals)',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w900,
-                              foreground:
-                                  Paint()
-                                    ..style = PaintingStyle.stroke
-                                    ..color = Color(0x7ED9D9D9),
-                            ),
-                          ),
-                          Text(
-                            'Per-meal breakdown (${mealsC.text} Meals)',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w900,
-                              color: Color(0x7ED9D9D9),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        'Per-meal breakdown (${mealsC.text} Meals)',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0xBED9D9D9),
+                        ),
                       ),
                     ],
                   ),
@@ -589,28 +545,13 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
                 SizedBox(height: 10),
                 Row(
                   children: [
-                    Stack(
-                      children: [
-                        Text(
-                          'Suggested Recipes',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w900,
-                            foreground:
-                                Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..color = Color(0x7ED9D9D9),
-                          ),
-                        ),
-                        Text(
-                          'Suggested Recipes',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w900,
-                            color: Color(0x7ED9D9D9),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'Suggested Recipes',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xBED9D9D9),
+                      ),
                     ),
                   ],
                 ),
@@ -656,8 +597,8 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
               label,
               style: TextStyle(
                 fontSize: 18,
-                color: isSelected ? Color(0xFF181A20) : Color(0xFFD9D9D9),
-                fontWeight: isSelected ? FontWeight.w900 : FontWeight.normal,
+                color: isSelected ? Color(0xFF181A20) : Color(0xBED9D9D9),
+                fontWeight: isSelected ? FontWeight.w900 : FontWeight.w500,
               ),
             ),
           ),
@@ -706,31 +647,15 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
             color: Color(0xBED9D9D9),
           ),
         ),
-        SizedBox(height: 10),
-        Stack(
-          children: [
-            Text(
-              value,
-              style: TextStyle(
-                height: 1,
-                fontSize: 20,
-                foreground:
-                    Paint()
-                      ..style = PaintingStyle.stroke
-                      ..color = color,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            Text(
-              value,
-              style: TextStyle(
-                height: 1,
-                fontSize: 20,
-                color: color,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ],
+        SizedBox(height: 7.5),
+        Text(
+          value,
+          style: TextStyle(
+            height: 1,
+            fontSize: 20,
+            color: color,
+            fontWeight: FontWeight.w900,
+          ),
         ),
       ],
     );
@@ -756,31 +681,15 @@ class CalorieCalculatorState extends State<CalorieCalculator> {
               color: Color(0xBED9D9D9),
             ),
           ),
-          SizedBox(height: 10),
-          Stack(
-            children: [
-              Text(
-                value,
-                style: TextStyle(
-                  height: 1,
-                  fontSize: 20,
-                  foreground:
-                      Paint()
-                        ..style = PaintingStyle.stroke
-                        ..color = color,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              Text(
-                value,
-                style: TextStyle(
-                  height: 1,
-                  fontSize: 20,
-                  color: color,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ],
+          SizedBox(height: 7.5),
+          Text(
+            value,
+            style: TextStyle(
+              height: 1,
+              fontSize: 20,
+              color: color,
+              fontWeight: FontWeight.w900,
+            ),
           ),
         ],
       ),

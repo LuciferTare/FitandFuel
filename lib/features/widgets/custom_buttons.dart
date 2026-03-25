@@ -27,7 +27,7 @@ Widget buildButtons({
             style: TextStyle(
               fontSize: 18,
               color: labelColor,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
