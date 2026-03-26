@@ -67,7 +67,7 @@ class _MainShellState extends State<MainShell> {
         break;
       case 1:
         if (!Get.isRegistered<RecipeController>()) {
-          Get.lazyPut(() => RecipeController());
+          Get.lazyPut(() => RecipeController(), fenix: true);
         }
         break;
       case 2:
@@ -77,7 +77,7 @@ class _MainShellState extends State<MainShell> {
         break;
       case 3:
         if (!Get.isRegistered<RecipeController>()) {
-          Get.lazyPut(() => RecipeController());
+          Get.lazyPut(() => RecipeController(), fenix: true);
         }
         break;
     }
@@ -108,7 +108,7 @@ class _MainShellState extends State<MainShell> {
             border: Border.all(width: 1, color: Color(0x18D9D9D9)),
             borderRadius: BorderRadius.circular(38),
           ),
-          margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           padding: EdgeInsets.all(5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

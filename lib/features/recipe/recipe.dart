@@ -459,7 +459,7 @@ class RecipeState extends State<Recipe> {
               border: Border.all(width: 1, color: const Color(0x18D9D9D9)),
               borderRadius: BorderRadius.circular(38),
             ),
-            margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             padding: const EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

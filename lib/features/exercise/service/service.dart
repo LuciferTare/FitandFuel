@@ -16,7 +16,7 @@ class ExerciseService {
 
       return data;
     } catch (e) {
-      debugPrint('[LOG] getExerciseData error: $e');
+      debugPrint('[Log] getExerciseData error: $e');
       rethrow;
     }
   }
@@ -35,7 +35,7 @@ class ExerciseService {
 
       return data;
     } catch (e) {
-      debugPrint('[LOG] getExerciseData error: $e');
+      debugPrint('[Log] getExerciseData error: $e');
       rethrow;
     }
   }

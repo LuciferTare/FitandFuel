@@ -98,14 +98,14 @@ class ExerciseState extends State<Exercise> {
           timeMs: 800,
         );
       } catch (e) {
-        debugPrint('[LOG] Thumbnail generation failed for $assetPath: $e');
+        debugPrint('[Log] Thumbnail generation failed for $assetPath: $e');
         return null;
       }
     });
   }
 
   Widget buildThumbnail(String videoAsset) {
-    if (videoAsset.isEmpty) {
+    if (videoAsset.trim().isEmpty || videoAsset == 'null') {
       return thumbnailFallback();
     }
 
@@ -206,7 +206,7 @@ class ExerciseState extends State<Exercise> {
         setState(() {});
       }
     } catch (e) {
-      debugPrint('[LOG] Video playback failed for $videoAsset: $e');
+      debugPrint('[Log] Video playback failed for $videoAsset: $e');
       await stopPlayback(refreshUi: false);
       if (mounted) {
         setState(() {
@@ -463,7 +463,7 @@ class ExerciseState extends State<Exercise> {
               border: Border.all(width: 1, color: Color(0x18D9D9D9)),
               borderRadius: BorderRadius.circular(38),
             ),
-            margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             padding: EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -540,6 +540,9 @@ class ExerciseState extends State<Exercise> {
 
   Widget exerciseCard({required int index, required model.ExerciseModel e}) {
     final isActive = playingIndex == index;
+    final hasVideo =
+        e.asset != null && e.asset!.trim().isNotEmpty && e.asset != 'null';
+    debugPrint('[Log] Asset value: "${e.asset}"');
 
     return Container(
       clipBehavior: Clip.antiAlias,
@@ -550,12 +553,15 @@ class ExerciseState extends State<Exercise> {
       ),
       child: GestureDetector(
         onTap: () async {
-          final hasVideo = e.asset != null && e.asset!.isNotEmpty;
-          setState(() {
-            playingIndex = (playingIndex == index) ? -1 : index;
-          });
-          if (hasVideo) {
-            await togglePlayback(index: index, videoAsset: e.asset!);
+          if (!hasVideo) return;
+
+          final isPlayingThisItem =
+              playingIndex == index && videoController != null;
+
+          if (isPlayingThisItem) {
+            await stopPlayback();
+          } else {
+            await togglePlayback(index: index, videoAsset: e.asset ?? '');
           }
         },
         child: Column(
@@ -568,7 +574,7 @@ class ExerciseState extends State<Exercise> {
                 clipBehavior: Clip.hardEdge,
                 children: [
                   Positioned.fill(
-                    child: buildMedia(index: index, videoAsset: '${e.asset}'),
+                    child: buildMedia(index: index, videoAsset: e.asset ?? ''),
                   ),
                   if (e.muscle != null && e.muscle != '')
                     Positioned(
@@ -593,23 +599,25 @@ class ExerciseState extends State<Exercise> {
                         ),
                       ),
                     ),
-                  Positioned(
-                    left: 10,
-                    right: 10,
-                    bottom: 10,
-                    child: Row(
-                      children: [
-                        Icon(
-                          isActive
-                              ? Icons.pause_circle_outline
-                              : Icons.play_circle_outline,
-                          size: 35,
-                          color:
-                              isActive ? Color(0xFFFCD535) : Color(0xFFD9D9D9),
-                        ),
-                      ],
+                  if (hasVideo)
+                    Positioned(
+                      left: 10,
+                      bottom: 10,
+                      child: Row(
+                        children: [
+                          Icon(
+                            isActive
+                                ? Icons.pause_circle_outline
+                                : Icons.play_circle_outline,
+                            size: 35,
+                            color:
+                                isActive
+                                    ? Color(0xFFFCD535)
+                                    : Color(0xFFD9D9D9),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),

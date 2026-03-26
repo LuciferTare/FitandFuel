@@ -56,7 +56,7 @@ class MusicState extends State<Music> {
         await player.play();
       }
     } catch (err) {
-      debugPrint('[LOG] Failed to resume playback: $err');
+      debugPrint('[Log] Failed to resume playback: $err');
     }
   }
 
@@ -72,7 +72,7 @@ class MusicState extends State<Music> {
     try {
       if (player.hasNext) await player.seekToNext();
     } catch (err) {
-      debugPrint('[LOG] skipNext error: $err');
+      debugPrint('[Log] skipNext error: $err');
     }
   }
 
@@ -80,7 +80,7 @@ class MusicState extends State<Music> {
     try {
       if (player.hasPrevious) await player.seekToPrevious();
     } catch (err) {
-      debugPrint('[LOG] skipPrevious error: $err');
+      debugPrint('[Log] skipPrevious error: $err');
     }
   }
 
@@ -91,7 +91,7 @@ class MusicState extends State<Music> {
   }) async {
     final ids = playlist.songIds ?? [];
     if (ids.isEmpty) {
-      debugPrint('[LOG] Playlist contains no song ids.');
+      debugPrint('[Log] Playlist contains no song ids.');
       return;
     }
     final orderedSongs =
@@ -101,7 +101,7 @@ class MusicState extends State<Music> {
             .toList();
     if (orderedSongs.isEmpty) {
       debugPrint(
-        '[LOG] No matching songs found for playlist ${playlist.title}',
+        '[Log] No matching songs found for playlist ${playlist.title}',
       );
       return;
     }
@@ -115,7 +115,7 @@ class MusicState extends State<Music> {
       sources.add(AudioSource.uri(uri, tag: mediaItem));
     }
     if (sources.isEmpty) {
-      debugPrint('[LOG] No valid audio sources for playlist ${playlist.title}');
+      debugPrint('[Log] No valid audio sources for playlist ${playlist.title}');
       return;
     }
     try {
@@ -134,7 +134,7 @@ class MusicState extends State<Music> {
               : orderedSongs.first;
       if (autoPlay) await player.play();
     } catch (e) {
-      debugPrint('[LOG] Error loading playlist: $e');
+      debugPrint('[Log] Error loading playlist: $e');
     }
   }
 
@@ -171,7 +171,7 @@ class MusicState extends State<Music> {
       assetFileCache[assetPath] = file.path;
       return Uri.file(file.path);
     } catch (e) {
-      debugPrint('[LOG] artUriFromAsset error for $assetPath: $e');
+      debugPrint('[Log] artUriFromAsset error for $assetPath: $e');
       return Uri.parse('asset:///$assetPath');
     }
   }

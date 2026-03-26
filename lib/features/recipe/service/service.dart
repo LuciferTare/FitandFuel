@@ -13,7 +13,7 @@ class RecipeService {
 
       return data;
     } catch (e) {
-      debugPrint('[LOG] getRecipesData error: $e');
+      debugPrint('[Log] getRecipesData error: $e');
       rethrow;
     }
   }
@@ -26,7 +26,7 @@ class RecipeService {
 
       return data.firstWhere((r) => r.id == id);
     } catch (e) {
-      debugPrint('[LOG] getRecipeData error: $e');
+      debugPrint('[Log] getRecipeData error: $e');
       rethrow;
     }
   }

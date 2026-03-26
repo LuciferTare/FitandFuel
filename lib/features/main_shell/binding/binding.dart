@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class MainShellBinding extends Bindings {
   @override
   void dependencies() {
-    final int index = Get.arguments?['index'] ?? 0;
+    final int index = Get.arguments?['idx'] ?? 0;
 
     switch (index) {
       case 0:

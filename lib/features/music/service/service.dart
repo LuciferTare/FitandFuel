@@ -15,7 +15,7 @@ class MusicService {
 
       return data;
     } catch (e) {
-      debugPrint('[LOG] getPlaylistsData error: $e');
+      debugPrint('[Log] getPlaylistsData error: $e');
       rethrow;
     }
   }
@@ -28,7 +28,7 @@ class MusicService {
 
       return data;
     } catch (e) {
-      debugPrint('[LOG] getSongsData error: $e');
+      debugPrint('[Log] getSongsData error: $e');
       rethrow;
     }
   }

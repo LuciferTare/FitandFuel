@@ -94,7 +94,7 @@ class MusicController extends GetxController {
       playlists.assignAll(results[0] as List<PlaylistModel>);
       songs.assignAll(results[1] as List<SongModel>);
     } catch (e) {
-      debugPrint('[LOG] loadMusicData error: $e');
+      debugPrint('[Log] loadMusicData error: $e');
     } finally {
       isLoading.value = false;
     }

@@ -12,7 +12,7 @@ class HomeService {
 
       return data;
     } catch (e) {
-      debugPrint('[LOG] getQuoteData error: $e');
+      debugPrint('[Log] getQuoteData error: $e');
       rethrow;
     }
   }
@@ -28,7 +28,7 @@ class HomeService {
 
       return data;
     } catch (e) {
-      debugPrint('[LOG] getExerciseData error: $e');
+      debugPrint('[Log] getExerciseData error: $e');
       rethrow;
     }
   }

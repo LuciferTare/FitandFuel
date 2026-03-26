@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class RecipeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => RecipeController());
+    Get.lazyPut(() => RecipeController(), fenix: true);
   }
 }
