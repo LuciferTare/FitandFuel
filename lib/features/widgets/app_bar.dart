@@ -36,6 +36,18 @@ PreferredSize appBar({required BuildContext context}) {
               color: Color(0xFFD9D9D9),
             ),
           ),
+          Spacer(),
+          ClipOval(
+            child: Container(
+              color: const Color(0x3ED9D9D9),
+              child: Image.asset(
+                'assets/images/brand.png',
+                width: 35,
+                height: 35,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
         ],
       ),
       leadingWidth: 0,
