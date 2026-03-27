@@ -105,21 +105,21 @@ class MusicState extends State<Music> {
       );
       return;
     }
+    final mediaItems = await Future.wait(
+      orderedSongs.map((song) => mediaItemFromSong(song)),
+    );
     final List<AudioSource> sources = [];
-    for (final song in orderedSongs) {
-      final assetPath = song.asset ?? '';
+    for (int i = 0; i < orderedSongs.length; i++) {
+      final assetPath = orderedSongs[i].asset ?? '';
       if (assetPath.isEmpty) continue;
-      final encodedPath = Uri.encodeFull(assetPath);
-      final uri = Uri.parse('asset:///$encodedPath');
-      final mediaItem = await mediaItemFromSong(song);
-      sources.add(AudioSource.uri(uri, tag: mediaItem));
+      final uri = Uri.parse('asset:///${Uri.encodeFull(assetPath)}');
+      sources.add(AudioSource.uri(uri, tag: mediaItems[i]));
     }
     if (sources.isEmpty) {
       debugPrint('[Log] No valid audio sources for playlist ${playlist.title}');
       return;
     }
     try {
-      await player.stop();
       await player.setAudioSources(
         sources,
         initialIndex: startIndex,
@@ -146,7 +146,7 @@ class MusicState extends State<Music> {
   Future<MediaItem> mediaItemFromSong(model.SongModel song) async {
     final artUri = await artUriFromAsset(song.thumb ?? '');
     return MediaItem(
-      id: song.asset ?? '',
+      id: '${song.id}',
       title: song.title ?? 'Unknown',
       artist: song.artist ?? 'Unknown',
       artUri: artUri,
@@ -163,7 +163,10 @@ class MusicState extends State<Music> {
     }
     try {
       final byteData = await rootBundle.load(assetPath);
-      final bytes = byteData.buffer.asUint8List();
+      final bytes = byteData.buffer.asUint8List(
+        byteData.offsetInBytes,
+        byteData.lengthInBytes,
+      );
       final dir = await getTemporaryDirectory();
       final filename = 'art_${p.basename(assetPath)}';
       final file = File(p.join(dir.path, filename));

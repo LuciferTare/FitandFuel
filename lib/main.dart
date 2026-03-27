@@ -2,6 +2,7 @@ import 'package:fit_and_fuel/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,7 +10,9 @@ Future<void> main() async {
     androidNotificationChannelId: 'music_audio_channel',
     androidNotificationChannelName: 'Music Playback',
     androidNotificationOngoing: true,
+    androidNotificationIcon: 'drawable/notification_icon',
   );
+  await Permission.notification.request();
 
   runApp(MyApp());
 }
